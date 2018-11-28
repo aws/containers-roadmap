@@ -45,3 +45,5 @@ A: We haven't worked out out pull requests should work for a public roadmap page
 ## License
 
 This library is licensed under the Apache 2.0 License. 
+
+To learn more about the services, head here: http://aws.amazon.com/containers
