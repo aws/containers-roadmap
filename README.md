@@ -26,12 +26,12 @@ target dates for features.
 
 **Q: What do the roadmap categories mean?**
 * *Just shipped* - obvious, right?
-* *Coming soon* - coming up.  Think 3-6 months, give or take.
+* *Coming soon* - coming up.  Think a couple of months out, give or take.
 * *We're working on it* - in progress, but further out.  We might still be working through the implementation details, or scoping stuff out.
 
 **Q: Is everything on the roadmap?**
 
-A: The majority of our development work for Amazon EKS and other AWS-sponsored OSS projects are included on this roadmap. Of course, there will be technologies we are very excited about that we are going to launch without notice to surprise and delight our customers.
+A: The majority of our development work for Amazon ECS, Fargate, ECR, EKS and other AWS-sponsored OSS projects are included on this roadmap. Of course, there will be technologies we are very excited about that we are going to launch without notice to surprise and delight our customers.
 
 **Q: How can I provide feedback or ask for more information?**
 
