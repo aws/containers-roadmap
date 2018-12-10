@@ -36,7 +36,7 @@ A: Please open an issue!
 
 **Q: Will you accept a pull request?**
 
-A: We haven't worked out out pull requests should work for a public roadmap page, but we will take all PRs very seriously and review for inclusion.
+A: We haven't worked out out pull requests should work for a public roadmap page, but we will take all PRs very seriously and review for inclusion. Read about [contributing](/CONTRIBUTING.md).
 
 ## License
 
