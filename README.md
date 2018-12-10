@@ -7,22 +7,19 @@ This is the public roadmap for AWS container services (ECS, ECR, Fargate, and EK
 
 ## Introduction
 This is the experimental public roadmap for AWS Container services.
-Our customers are asking us for more information about our upcoming products and
-priorities, and we want to create a mechanism for not only delivering that information but
-getting feedback.
+Knowing about our upcoming products and priorities helps our customers plan. This repository contains information about what we are working on and allows all AWS customers to give direct feedback.
 
-[Learn More »](#faq)
+[See the roadmap »](https://github.com/aws/containers-roadmap/projects/1)
 
 
-# FAQ
+## FAQs
 **Q: Why did you build this?**
 
 A: We know that our customers are making decisions and plans based on what we are developing, and we want to provide our customers the insights they need to plan.
 
 **Q: Why are there no dates on your roadmap?**
 
-A: Because job zero is security and operational stability, we can't provide specific
-target dates for features.
+A: Because job zero is security and operational stability, we can't provide specific target dates for features.
 
 **Q: What do the roadmap categories mean?**
 * *Just shipped* - obvious, right?
@@ -39,8 +36,7 @@ A: Please open an issue!
 
 **Q: Will you accept a pull request?**
 
-A: We haven't worked out out pull requests should work for a public roadmap page, but we will take all PRs very seriously and review for inclusion.
-
+A: We haven't worked out out pull requests should work for a public roadmap page, but we will take all PRs very seriously and review for inclusion. Read about [contributing](/CONTRIBUTING.md).
 
 ## License
 
