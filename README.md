@@ -12,7 +12,7 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 [See the roadmap »](https://github.com/aws/containers-roadmap/projects/1)
 
 
-# FAQ
+## FAQs
 **Q: Why did you build this?**
 
 A: We know that our customers are making decisions and plans based on what we are developing, and we want to provide our customers the insights they need to plan.
