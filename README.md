@@ -34,6 +34,10 @@ A: The majority of our development work for Amazon ECS, Fargate, ECR, EKS and ot
 
 A: Please open an issue!
 
+**Q: How can I request a feature be added to the roadmap?**
+
+A: Please open an issue!  You can read about how to contribute [here](/CONTRIBUTING.md). Community submitted issues will be tagged "Proposed" and will be reviewed by the team.
+
 **Q: Will you accept a pull request?**
 
 A: We haven't worked out how pull requests should work for a public roadmap page, but we will take all PRs very seriously and review for inclusion. Read about [contributing](/CONTRIBUTING.md).
