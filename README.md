@@ -25,6 +25,7 @@ A: Because job zero is security and operational stability, we can't provide spec
 * *Just shipped* - obvious, right?
 * *Coming soon* - coming up.  Think a couple of months out, give or take.
 * *We're working on it* - in progress, but further out.  We might still be working through the implementation details, or scoping stuff out.
+**Researching** - We're thinking about it. This might mean we're still designing, or thinking through how this might work. This is a great phase to send how you want to see something implemented!  We'd love to see your usecase or design ideas here. 
 
 **Q: Is everything on the roadmap?**
 
