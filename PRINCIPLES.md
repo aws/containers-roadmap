@@ -19,4 +19,4 @@ These are the principles that embody the culture of the container services organ
 
 * we are open and transparent in sharing the product vision and direction with the team and customers, identifying where we are succeeding and where we can improve, recognizing that sharing this information accurately advises us on how we get better;
 * we encourage and enable individuals to interact directly with customers as a means toward building awareness, understanding, and customer empathy;
-* we embrace open source where possible as a mechanism to build better software, to give our customers insight into our designs, and because we don't assume that we always have the best answers.
+* we embrace Open Source where possible as a mechanism to build better software, to give our customers insight into our designs, and because we don't assume that we always have the best answers.
