@@ -3,7 +3,7 @@ Start here to participate in the Windows node preview program for [Amazon Elasti
 
 **Note:** The assets and instructions in this repository folder are offered as part of a _public preview_ program administered by AWS.
 
-Using the instructions and assets in this repository folder as well as running Windows Server EC2 instances (worker nodes) with Amazon EKS is governed as a preview program under the [AWS Terms of Service](https://aws.amazon.com/service-terms/).
+Using the instructions and assets in this repository folder as well as running Windows Server EC2 instances (worker nodes) with Amazon EKS is governed as a preview program under the [AWS Service Terms](https://aws.amazon.com/service-terms/).
 
 #### Contents
 * [Before you begin](#before-you-begin)
@@ -12,7 +12,8 @@ Using the instructions and assets in this repository folder as well as running W
 
 #### Leaving feedback and getting help
 * The assets and instructions in this repository are offered on an _as-is_ basis as part of a public preview program for new AWS service functionality.
-* To send details of any problems, or to send more detailed feedback directly to the EKS Windows preview team, email [eks-windows-preview@amazon.com](mailto:eks-windows-preview@amazon.com). _(Please give 24-48 hours for a reply.)_
+* Leave comments or questions on our [GitHub issue](https://github.com/aws/containers-roadmap/issues/69).
+* To send more detailed problem information or feedback directly to the EKS Windows preview team, email [eks-windows-preview@amazon.com](mailto:eks-windows-preview@amazon.com). _(Please give 24-48 hours for a reply.)_
 * For issues with the Amazon EKS service (creating, modifying, deleting a cluster) or with your AWS account, please contact AWS support using the AWS console.
 
 ## Before you begin
@@ -215,8 +216,10 @@ In browser, access `http://<<ExternalIP of windows-server-iis-service>>/default.
 
 ## Next steps
 
-* Try out running your Windows containers on your new EKS cluster.
+* Run your own Windows containers on your new EKS cluster.
 
-* To send details of any problems, or to send more detailed feedback directly to the EKS Windows preview team, email [eks-windows-preview@amazon.com](mailto:eks-windows-preview@amazon.com). _(Please give 24-48 hours for a reply.)_
+* Leave comments or questions on our [GitHub issue](https://github.com/aws/containers-roadmap/issues/69).
+
+* To send more detailed problem information or feedback directly to the EKS Windows preview team, email [eks-windows-preview@amazon.com](mailto:eks-windows-preview@amazon.com). _(Please give 24-48 hours for a reply.)_
 
 * This is an evolving project. As we roll out new features and functionality, we will update this repository and the roadmap issue.
