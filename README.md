@@ -1,8 +1,8 @@
 ## Containers Roadmap
 
-This is the public roadmap for AWS container services (ECS, ECR, Fargate, and EKS). 
+This is the public roadmap for AWS container services (ECS, ECR, Fargate, and EKS).
 
----
+# Experimental Public Roadmap - AWS Container Services
 
 ## Introduction
 This is the experimental public roadmap for AWS Container services.
@@ -10,6 +10,10 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 
 [See the roadmap »](https://github.com/aws/containers-roadmap/projects/1)
 
+## Developer Preview Programs
+We now have information for developer preview programs within this repository.
+* Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
+* Participate in the EKS Windows preview [here](/preview-programs/eks-windows-preview).
 
 ## FAQs
 **Q: Why did you build this?**
@@ -24,7 +28,7 @@ A: Because job zero is security and operational stability, we can't provide spec
 * *Just shipped* - obvious, right?
 * *Coming soon* - coming up.  Think a couple of months out, give or take.
 * *We're working on it* - in progress, but further out.  We might still be working through the implementation details, or scoping stuff out.
-* *Researching* - We're thinking about it. This might mean we're still designing, or thinking through how this might work. This is a great phase to send how you want to see something implemented!  We'd love to see your usecase or design ideas here. 
+* *Researching* - We're thinking about it. This might mean we're still designing, or thinking through how this might work. This is a great phase to send how you want to see something implemented!  We'd love to see your usecase or design ideas here.
 
 **Q: Is everything on the roadmap?**
 
@@ -44,6 +48,6 @@ A: We haven't worked out how pull requests should work for a public roadmap page
 
 ## License
 
-This library is licensed under the Apache 2.0 License. 
+This library is licensed under the Apache 2.0 License.
 
 To learn more about the services, head here: http://aws.amazon.com/containers
