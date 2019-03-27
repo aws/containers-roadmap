@@ -106,7 +106,7 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
     * **WindowsNodeAutoScalingGroupDesiredCapacity**: Enter the desired number of nodes to scale to when your stack is created.
     * **WindowsNodeAutoScalingGroupMaxSize**: Enter the maximum number of nodes that your worker node Auto Scaling group can scale out to.
     * **WindowsNodeAutoScalingGroupMinSize**: Enter the minimum number of nodes that your worker node Auto Scaling group can scale in to.
-    * **WindowsNodeImageId**: Enter the latest [Amazon EKS Windows worker node AMI ID](#latest-eks-worker-amis) for your Region.
+    * **WindowsNodeImageId**: Enter the latest [Amazon EKS Windows worker node AMI ID](#latest-eks-windows-amis) for your Region.
     * **WindowsNodeInstanceType**: Choose an instance type for your worker nodes (see [Before you begin](#before-you-begin)).
 
 8. (Optional) On the **Options** page, tag your stack resources. Choose **Next**.
