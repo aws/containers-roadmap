@@ -89,9 +89,9 @@ Refer to the Amazon EKS [getting started guide prerequisites](https://docs.aws.a
 The Amazon EKS Windows preview works in [all regions where Amazon EKS is available](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/).
 
 3. Choose Create stack.
-4. Download [amazon-eks-cfn-quickstart-windows.yaml](/preview-programs/eks-windows-preview/amazon-eks-cfn-quickstart-windows.yaml) CloudFormation template from this folder.
+4. Download [amazon-eks-cfn-quickstart-windows.yaml](https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-cfn-quickstart-windows.yaml) CloudFormation template from this folder.
 5. For Choose a template, select Upload a template to Amazon S3. **Note**: You must download the template from this repo and upload it to S3. If you use the GitHub URL to create your stack, creation will fail.
-6. Select the downloaded copy of amazon-eks-cfn-quickstart-windows.yaml.
+6. Select your local copy of amazon-eks-cfn-quickstart-windows.yaml.
 7. On the **Specify Details** page, fill out the parameters accordingly, and then choose **Next**.
 
     * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it `eks-vpc`.
