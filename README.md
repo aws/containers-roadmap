@@ -2,8 +2,6 @@
 
 This is the public roadmap for AWS container services (ECS, ECR, Fargate, and EKS).
 
-# Experimental Public Roadmap - AWS Container Services
-
 ## Introduction
 This is the experimental public roadmap for AWS Container services.
 Knowing about our upcoming products and priorities helps our customers plan. This repository contains information about what we are working on and allows all AWS customers to give direct feedback.
