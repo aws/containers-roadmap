@@ -1,0 +1,218 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  ClusterName:
+    Description: The cluster name to create EKS cluster.
+    Type: String
+
+  KeyName:
+    Description: The EC2 Key Pair to allow SSH & RDP access to the instances
+    Type: AWS::EC2::KeyPair::KeyName
+
+  LinuxNodeImageId:
+    Description: AMI id for the node instances.
+    Type: String
+
+  WindowsNodeImageId:
+    Type: AWS::EC2::Image::Id
+    Description: AMI id for the node instances.
+
+  WindowsNodeInstanceType:
+    Description: EC2 instance type for the node instances
+    Type: String
+    Default: t2.medium
+    AllowedValues:
+    - t2.small
+    - t2.medium
+    - t2.large
+    - t2.xlarge
+    - t2.2xlarge
+    - t3.small
+    - t3.medium
+    - t3.large
+    - t3.xlarge
+    - t3.2xlarge
+    - m4.16xlarge
+    - m5a.large
+    - m5a.xlarge
+    - m5a.2xlarge
+    - m5a.4xlarge
+    - m5a.12xlarge
+    - m5a.24xlarge
+    - m5d.large
+    - m5d.xlarge
+    - m5d.2xlarge
+    - m5d.4xlarge
+    - m5d.12xlarge
+    - m5d.24xlarge
+    - m5.large
+    - m5.xlarge
+    - m5.2xlarge
+    - m5.4xlarge
+    - m5.12xlarge
+    - m5.24xlarge
+    - c5d.large
+    - c5d.xlarge
+    - c5d.2xlarge
+    - c5d.4xlarge
+    - c5d.9xlarge
+    - c5d.18xlarge
+    - c5n.large
+    - c5n.xlarge
+    - c5n.2xlarge
+    - c5n.4xlarge
+    - c5n.9xlarge
+    - c5n.18xlarge
+    - c5.large
+    - c5.xlarge
+    - c5.2xlarge
+    - c5.4xlarge
+    - c5.9xlarge
+    - c5.18xlarge
+    - h1.2xlarge
+    - h1.4xlarge
+    - h1.8xlarge
+    - h1.16xlarge
+    - i3.large
+    - i3.xlarge
+    - i3.2xlarge
+    - i3.4xlarge
+    - i3.8xlarge
+    - i3.16xlarge
+    - r4.large
+    - r4.xlarge
+    - r4.2xlarge
+    - r4.4xlarge
+    - r4.8xlarge
+    - r4.16xlarge
+    - r5.large
+    - r5.xlarge
+    - r5.2xlarge
+    - r5.4xlarge
+    - r5.12xlarge
+    - r5.24xlarge
+    - r5a.large
+    - r5a.xlarge
+    - r5a.2xlarge
+    - r5a.4xlarge
+    - r5a.12xlarge
+    - r5a.24xlarge
+    - r5d.large
+    - r5d.xlarge
+    - r5d.2xlarge
+    - r5d.4xlarge
+    - r5d.12xlarge
+    - r5d.24xlarge
+    - z1d.large
+    - z1d.xlarge
+    - z1d.2xlarge
+    - z1d.3xlarge
+    - z1d.6xlarge
+    - z1d.12xlarge
+    ConstraintDescription: Must be a valid EC2 instance type
+
+  WindowsNodeAutoScalingGroupDesiredCapacity:
+    Type: Number
+    Description: Desired capacity of Node Group ASG.
+    Default: 3
+
+  WindowsNodeAutoScalingGroupMinSize:
+    Type: Number
+    Description: Minimum size of Node Group ASG.
+    Default: 1
+
+  WindowsNodeAutoScalingGroupMaxSize:
+    Type: Number
+    Description: Maximum size of Node Group ASG. Set to at least 1 greater than NodeAutoScalingGroupDesiredCapacity
+    Default: 4
+
+Resources:
+  EKSServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Join ["-", [!Ref ClusterName, "EKSServiceRole"]]
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - eks.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEKSServicePolicy
+        - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+
+  EKSVPCStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-vpc-sample.yaml
+
+  EKSCluster:
+    Type: AWS::EKS::Cluster
+    Properties:
+      Name: !Ref ClusterName
+      Version: 1.11
+      RoleArn: !GetAtt [EKSServiceRole, Arn]
+      ResourcesVpcConfig:
+        SecurityGroupIds: !Split ["," , !GetAtt EKSVPCStack.Outputs.SecurityGroups]
+        SubnetIds: !Split ["," , !GetAtt EKSVPCStack.Outputs.SubnetIds]
+
+  EKSLinuxWorkerStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-nodegroup.yaml
+      Parameters:
+        KeyName: !Ref KeyName
+        NodeImageId: !Ref LinuxNodeImageId
+        NodeInstanceType: "t3.medium"
+        NodeAutoScalingGroupDesiredCapacity: 1
+        ClusterName: !Ref EKSCluster
+        NodeGroupName: !Join ["-", [!Ref ClusterName, "LinuxNodeGroup"]]
+        ClusterControlPlaneSecurityGroup: !GetAtt EKSVPCStack.Outputs.SecurityGroups
+        VpcId: !GetAtt EKSVPCStack.Outputs.VpcId
+        Subnets: !GetAtt EKSVPCStack.Outputs.SubnetIds
+
+  EKSVPCResourceControllerPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: !Join ["-", [!Ref ClusterName, "UnassignPrivateIpAddresses"]]
+      Description: "EKS VPC resource controller UnAssignPrivateIPAddresses"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Action: "ec2:UnassignPrivateIpAddresses"
+            Resource: "*"
+      Roles: [!Select [1, !Split ["role/", !GetAtt EKSLinuxWorkerStack.Outputs.NodeInstanceRole]]]
+
+  EKSWindowsWorkerStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-windows-nodegroup.yaml
+      Parameters:
+        KeyName: !Ref KeyName
+        NodeImageId: !Ref WindowsNodeImageId
+        NodeInstanceType: !Ref WindowsNodeInstanceType
+        NodeAutoScalingGroupDesiredCapacity: !Ref WindowsNodeAutoScalingGroupDesiredCapacity
+        NodeAutoScalingGroupMinSize: !Ref WindowsNodeAutoScalingGroupMinSize
+        NodeAutoScalingGroupMaxSize: !Ref WindowsNodeAutoScalingGroupMaxSize
+        ClusterName: !Ref EKSCluster
+        NodeGroupName: !Join ["-", [!Ref ClusterName, "WindowsNodeGroup"]]
+        ClusterControlPlaneSecurityGroup: !GetAtt EKSVPCStack.Outputs.SecurityGroups
+        NodeSecurityGroup: !GetAtt EKSLinuxWorkerStack.Outputs.NodeSecurityGroup
+        VpcId: !GetAtt EKSVPCStack.Outputs.VpcId
+        Subnets: !GetAtt EKSVPCStack.Outputs.SubnetIds
+
+Outputs:
+  LinuxNodeInstanceRole:
+    Description: The linux node instance role
+    Value:
+      !GetAtt EKSLinuxWorkerStack.Outputs.NodeInstanceRole
+
+  WindowsNodeInstanceRole:
+    Description: The windows node instance role
+    Value:
+      !GetAtt EKSWindowsWorkerStack.Outputs.NodeInstanceRole

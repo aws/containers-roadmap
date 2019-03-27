@@ -1,0 +1,90 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: vpc-resource-controller
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/status
+  - pods
+  verbs:
+  - update
+  - get
+  - list
+  - watch
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vpc-resource-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: vpc-resource-controller
+subjects:
+- kind: ServiceAccount
+  name: vpc-resource-controller
+  namespace: kube-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vpc-resource-controller
+  namespace: kube-system
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: vpc-resource-controller
+  namespace: kube-system
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vpc-resource-controller
+        tier: backend
+        track: stable
+    spec:
+      serviceAccount: vpc-resource-controller
+      containers:
+      - command:
+        - /vpc-resource-controller
+        args:
+        - -stderrthreshold=info
+        image: 602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/vpc-resource-controller:beta
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            host: 127.0.0.1
+            path: /healthz
+            port: 61679
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+        name: vpc-resource-controller
+        securityContext:
+          privileged: true
+      hostNetwork: true
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: eks:kube-proxy-windows
+  labels:
+    k8s-app: kube-proxy
+    eks.amazonaws.com/component: kube-proxy
+subjects:
+  - kind: Group
+    name: "eks:kube-proxy-windows"
+roleRef:
+  kind: ClusterRole
+  name: system:node-proxier
+  apiGroup: rbac.authorization.k8s.io
