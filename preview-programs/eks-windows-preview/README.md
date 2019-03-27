@@ -82,16 +82,16 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 Refer to the Amazon EKS [getting started guide prerequisites](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#eks-prereqs).
 
 ### Step 2. Create Your VPC, IAM Role, Amazon EKS Cluster & Worker nodes
-1. Download [amazon-eks-cfn-quickstart-windows.yaml](/preview-programs/eks-windows-preview/amazon-eks-cfn-quickstart-windows.yaml) CloudFormation template from this folder.
-2. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation.
-3. From the navigation bar, select an AWS region where Amazon EKS is available.
+1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation.
+2. From the navigation bar, select an AWS region where Amazon EKS is available.
 
 **Note**
 The Amazon EKS Windows preview works in [all regions where Amazon EKS is available](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/).
 
-4. Choose Create stack.
-5. For Choose a template, select Upload a template to Amazon S3.
-6. Select the downloaded copy of amazon-eks-cfn-quickstart-windows.yaml
+3. Choose Create stack.
+4. Download [amazon-eks-cfn-quickstart-windows.yaml](/preview-programs/eks-windows-preview/amazon-eks-cfn-quickstart-windows.yaml) CloudFormation template from this folder.
+5. For Choose a template, select Upload a template to Amazon S3. **Note**: You must download the template from this repo and upload it to S3. If you use the GitHub URL to create your stack, creation will fail.
+6. Select the downloaded copy of amazon-eks-cfn-quickstart-windows.yaml.
 7. On the **Specify Details** page, fill out the parameters accordingly, and then choose **Next**.
 
     * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it `eks-vpc`.
@@ -122,7 +122,7 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
 
 `kubectl apply -f eks-clusteraddons-quickstart-windows.yaml`
 
-### Step 4. Launch your containers
+### Step 4. Deploy the VPC admission webhook
 1. Install **openssl** and **jq**
    * openssl (https://github.com/openssl/openssl/releases)
    * jq (https://github.com/stedolan/jq/wiki/Installation)
@@ -211,7 +211,7 @@ Watch for the pod to transition to "RUNNING" state. Then check pod details.
 
 Note down the External-IP and wait for few min. to propagate DNS record.
 
-In browser, access http://<<External-IP>>/default.html
+In browser, access `http://<<ExternalIP of windows-server-iis-service>>/default.html`
 
 ## Next steps
 
