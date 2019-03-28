@@ -83,17 +83,21 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 Refer to the Amazon EKS [getting started guide prerequisites](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#eks-prereqs).
 
 ### Step 2. Create Your VPC, IAM Role, Amazon EKS Cluster & Worker nodes
-1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation.
-2. From the navigation bar, select an AWS region where Amazon EKS is available.
+1. Download [amazon-eks-cfn-quickstart-windows.yaml](https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-cfn-quickstart-windows.yaml) CloudFormation template from this folder.
+2. Download [amazon-eks-windows-nodegroup.yaml](https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-windows-nodegroup.yaml) CloudFormation template from this folder.
+3. Open the [Amazon S3 console](https://s3.console.aws.amazon.com/s3/home) and upload the [amazon-eks-windows-nodegroup.yaml](https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-windows-nodegroup.yaml) file that you downloaded. Copy the S3 URL from the uploaded file.
+4. Open the [amazon-eks-cfn-quickstart-windows.yaml](https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-cfn-quickstart-windows.yaml) file that you downloaded in your favorite text editor.
+5. Replace the **Template URL** placeholder on line 194 with the S3 URL you copied for `amazon-eks-windows-nodegroup.yaml` and save the file.
+6. Open the AWS CloudFormation console at [https://console.aws.amazon.com/cloudformation](https://console.aws.amazon.com/cloudformation/home).
+7. From the navigation bar, select an AWS region where Amazon EKS is available.
 
 **Note**
 The Amazon EKS Windows preview works in [all regions where Amazon EKS is available](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/).
 
-3. Choose Create stack.
-4. Download [amazon-eks-cfn-quickstart-windows.yaml](https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-cfn-quickstart-windows.yaml) CloudFormation template from this folder.
-5. For Choose a template, select Upload a template to Amazon S3. **Note**: You must download the template from this repo and upload it to S3. If you use the GitHub URL to create your stack, creation will fail.
-6. Select your local copy of amazon-eks-cfn-quickstart-windows.yaml.
-7. On the **Specify Details** page, fill out the parameters accordingly, and then choose **Next**.
+8. Choose Create stack.
+9. For Choose a template, select Upload a template to Amazon S3. **Note**: You must download the template from this repo and upload it to S3. If you use the GitHub URL to create your stack, creation will fail.
+10. Select your local copy of amazon-eks-cfn-quickstart-windows.yaml.
+11. On the **Specify Details** page, fill out the parameters accordingly, and then choose **Next**.
 
     * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it `eks-vpc`.
     * **ClusterName**: Enter the name that you want to use for your Amazon EKS cluster.
@@ -109,10 +113,10 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
     * **WindowsNodeImageId**: Enter the latest [Amazon EKS Windows worker node AMI ID](#latest-eks-windows-amis) for your Region.
     * **WindowsNodeInstanceType**: Choose an instance type for your worker nodes (see [Before you begin](#before-you-begin)).
 
-8. (Optional) On the **Options** page, tag your stack resources. Choose **Next**.
-9. On the **Review** page, choose **Create**.
-10. When your stack is created, select it in the console and choose **Outputs**.
-11. Record the `LinuxNodeInstanceRole` and `WindowsNodeInstanceRole` values for the node instance roles that were created. You need this when you configure your Amazon EKS worker nodes.
+12. (Optional) On the **Options** page, tag your stack resources. Choose **Next**.
+13. On the **Review** page, choose **Create**.
+14. When your stack is created, select it in the console and choose **Outputs**.
+15. Record the `LinuxNodeInstanceRole` and `WindowsNodeInstanceRole` values for the node instance roles that were created. You need this when you configure your Amazon EKS worker nodes.
 
 ### Step 3. Deploy VPC Resource controller & kube-proxy-windows-cluster-role-binding
 1. Download cluster addons file locally
@@ -129,14 +133,15 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
    * jq (https://github.com/stedolan/jq/wiki/Installation)
 2. Setup the vpc admission webhook
    * Download the required scripts and deployment files
-   ```
+```
    curl -o webhook-create-signed-cert.sh https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/webhook-create-signed-cert.sh
    curl -o webhook-patch-ca-bundle.sh https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/webhook-patch-ca-bundle.sh
    curl -o vpc-admission-webhook-deployment.yaml https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/vpc-admission-webhook-deployment.yaml
 
    chmod +x webhook-create-signed-cert.sh
    chmod +x webhook-patch-ca-bundle.sh
-   ```
+```
+   
    * Setup secret for secure communication
 
     `./webhook-create-signed-cert.sh`

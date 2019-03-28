@@ -191,7 +191,7 @@ Resources:
   EKSWindowsWorkerStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/amazon-eks-windows-nodegroup.yaml
+      TemplateURL: <<replace with S3 URL for amazon-eks-windows-nodegroup.yaml>>
       Parameters:
         KeyName: !Ref KeyName
         NodeImageId: !Ref WindowsNodeImageId
