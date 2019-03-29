@@ -52,7 +52,8 @@ The specific resources you need to run Windows containers with Amazon EKS are wi
 **Kubernetes 1.11**
 
 *AMI Name: Windows_Server-2019-English-{Full / Core}-Containers-EKS*
-Note: Windows Full AMI is the full Windows Server. Windows Core AMI is the smaller AMI that only includes components necessary to run containers. You can use either version as part of this guide.
+
+**Note**: Windows Full AMI is the full Windows Server. Windows Core AMI is the smaller AMI that only includes components necessary to run containers. You can use either version as part of this guide.
 
 |  Region         | Server-2019-Engligh-Full-Container-EKS AMI ID | Server-2019-Engligh-Core-Container-EKS AMI ID  |                                        
 | --------------- | --------------------------------------------- | ---------------------------------------------- |
