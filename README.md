@@ -12,6 +12,7 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 We now have information for developer preview programs within this repository.
 * Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
 * Participate in the EKS Windows preview [here](/preview-programs/eks-windows-preview).
+* Participate in the EC2 ARM preview [here](/preview-programs/eks-ec2-arm-preview).
 
 ## FAQs
 **Q: Why did you build this?**
