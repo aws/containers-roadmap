@@ -32,15 +32,20 @@ The specific resources you need to run containers on EC2 A1 instances with Amazo
 
 ### Latest EKS A1 AMIs
 
-**Kubernetes 1.11**
-
-**Note:** EC2 ARM instances do not currently support GPU workloads.
+**Kubernetes 1.12**
 
 |  Region         | EKS Optimized AMI ID |                                        
 | --------------- | ---------------------------------------------  |
 | us-west-2       |           ami-XXX		|
 | us-west-1       |           ami-XXX           |
 
+
+**Kubernetes 1.11**
+
+|  Region         | EKS Optimized AMI ID |                                        
+| --------------- | ---------------------------------------------  |
+| us-west-2       |           ami-XXX		|
+| us-west-1       |           ami-XXX           |
 
 
 ## Instructions
