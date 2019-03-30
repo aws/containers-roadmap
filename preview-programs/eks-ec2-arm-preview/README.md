@@ -1,5 +1,4 @@
 # Amazon EKS EC2 ARM Instances Preview Program
-#dev-preview
 
 Start here to participate in the EC2 ARM instance preview program for [Amazon Elastic Container Service for Kubernetes (EKS)](https://aws.amazon.com/eks). Using the instructions and code in this repository you can run docker containers using EC2 ARM instances on a Kubernetes cluster that is managed by Amazon EKS.
 
