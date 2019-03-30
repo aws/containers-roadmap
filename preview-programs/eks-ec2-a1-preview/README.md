@@ -30,7 +30,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 ## Key Resources
 The specific resources you need to run containers on EC2 A1 instances with Amazon EKS are within this repository folder. All other resources needed to successfully start and manage an EKS cluster can be found within the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html).
 
-### Latest EKS Windows AMIs
+### Latest EKS A1 AMIs
 
 **Kubernetes 1.11**
 
@@ -38,13 +38,13 @@ The specific resources you need to run containers on EC2 A1 instances with Amazo
 
 |  Region         | EKS Optimized AMI ID |                                        
 | --------------- | ---------------------------------------------  |
-| us-west-2       |           ami-047f9f0be88cb9b8b		|
-| us-west-1       |           ami-0dca600383dc83e8e           |
+| us-west-2       |           ami-XXX		|
+| us-west-1       |           ami-XXX           |
 
 
 
 ## Instructions
-Follow these instructions to create a Kubernetes cluster with Amazon EKS and start a service on EC2 ARM nodes.
+Follow these instructions to create a Kubernetes cluster with Amazon EKS and start a service on EC2 A1 nodes.
 
 **Note**: This guide requires that you create a new EKS cluster. Please ensure you complete all steps to avoid issues.
 
