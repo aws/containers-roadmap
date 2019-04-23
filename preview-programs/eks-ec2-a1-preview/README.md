@@ -61,14 +61,10 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 **Note**: This guide requires that you create a new EKS cluster. Please ensure you complete all steps to avoid issues.
 
 ### Step 1. Install eksctl, the EKS command line tool
-1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed
-
-If you don't have Homebrew, you can install it by running `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-
+1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed.
+If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 2. Install the Weaveworks Homebrew tap: `brew tap weaveworks/tap`
-
-3. Install ekstctl `brew install weaveworks/tap/eksctl`
-
+3. Install ekstctl: `brew install weaveworks/tap/eksctl`
 4. Test that your installation was successful: `eksctl --help`
 
 ### Step 2. Install kubectl and AWS IAM authenticator
@@ -95,14 +91,9 @@ Test that your cluster is running using `kubectl get svc`.
 
 ### Step 4. Deploy ARM CNI Plugin
 1. Check that your Linux worker node joined the cluster: `kubectl get nodes`
-
 2. Download vpc resource controller configuration file locally:
-
 `wget https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/aws-k8s-cni-arm64.yaml`
-
-3. Deploy the vpc-resource-controller:
-
-`kubectl apply -f aws-k8s-cni-arm64.yaml`
+3. Deploy the vpc-resource-controller: `kubectl apply -f aws-k8s-cni-arm64.yaml`
 
 ### Step 5. Launch and Configure Amazon EKS ARM Worker Nodes
 1.
@@ -113,7 +104,9 @@ Test that your cluster is running using `kubectl get svc`.
 `wget https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/aws-auth-cm-arm64.yaml`
 
 2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile)>_ snippet with the **NodeInstanceRole** value that you recorded in the previous procedure, and save the file.
+
 **Important**: Do not modify any other lines in this file.
+
 ```
 apiVersion: v1
 kind: ConfigMap
@@ -128,13 +121,14 @@ data:
         - system:bootstrappers
         - system:nodes
 ```
-3. Apply the configuration. This command may take a few minutes to finish.
-`kubectl apply -f aws-auth-cm-arm64.yaml`
 
-**Note**: If you receive the error "aws-iam-authenticator": executable file not found in PATH, then your kubectl is not configured for Amazon EKS. For more information, see Installing aws-iam-authenticator.
+3. Apply the configuration. This command may take a few minutes to finish: `kubectl apply -f aws-auth-cm-arm64.yaml`
 
-4. Watch the status of your nodes and wait for them to reach the Ready status.
-`kubectl get nodes --watch`
+**Note**: If you receive the error `"aws-iam-authenticator": executable file not found in PATH`, then **kubectl** on your machine is not configured correctly for Amazon EKS. For more information, see [Installing aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
+
+If you receive any other authorization or resource type errors, see [Unauthorized or Access Denied (kubectl)](https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html#unauthorized). 
+
+4. Watch the status of your nodes and wait for them to reach the **Ready** status: `kubectl get nodes --watch`
 
 ### Step 7. Launch an app
 Launch the demo Guest Book application from the [EKS Getting Started Guide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
