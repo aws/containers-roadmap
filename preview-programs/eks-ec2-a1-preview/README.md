@@ -94,21 +94,36 @@ Test that your cluster is running using `kubectl get svc`.
 2. Deploy the vpc-resource-controller: `kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-k8s-cni-arm64.yaml`
 
 ### Step 5. Launch and Configure Amazon EKS ARM Worker Nodes
-1. Choose the correct AMI ID for your region from the [AMI table](#latest-eks-a1-amis)
-2. Create a nodegroup using EKSctl for your A1 AMIs, be sure to fill in your AMI ID.
+1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation. Ensure that you are in the AWS region that you created your EKS cluster in.
+2. Choose **Create stack**.
+3. For **Choose a template**, select **Specify an Amazon S3 template URL**.
+4. Paste the following URL into the text area and choose **Next**
+`https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/amazon-eks-arm-nodegroup.yaml`
+5. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
+  * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it <cluster-name>-worker-nodes.
+  * **ClusterName**: Enter the name that you used when you created your Amazon EKS cluster.
+    **Important**
+    This name must exactly match the name you used in Step 1: Create Your Amazon EKS Cluster; otherwise, your worker nodes cannot join the cluster.
+  * **ClusterControlPlaneSecurityGroup**: Choose the SecurityGroups value from the AWS CloudFormation output that you generated with Create your Amazon EKS Cluster VPC.
+  * **NodeGroupName**: Enter a name for your node group. This name can be used later to identify the Auto Scaling node group that is created for your worker nodes.
+  * **NodeAutoScalingGroupMinSize**: Enter the minimum number of nodes that your worker node Auto Scaling group can scale in to.
+  * **NodeAutoScalingGroupDesiredCapacity**: Enter the desired number of nodes to scale to when your stack is created.
+  * **NodeAutoScalingGroupMaxSize**: Enter the maximum number of nodes that your worker node Auto Scaling group can scale out to.
+  * **NodeInstanceType**: Choose an instance type for your worker nodes.
+  * **NodeImageId**: Enter the current Amazon EKS worker node AMI ID for your region from the [AMI table](#latest-eks-a1-amis).
+  * **BootstrapArguments**: --pause-container-account 940911992744
+  * **KeyName**: Enter the name of an Amazon EC2 key pair that you can use to decrypt administrator password while RDP into your worker nodes after they launch. If you don't already have an Amazon EC2 keypair, you can create one in the AWS Management Console. For more information, see Amazon EC2 Key Pairs in the Amazon EC2 User Guide for Linux Instances.
 
-```
-eksctl create nodegroup --cluster a1-preview \
---name a1-nodes
---node-type a1.medium \
---nodes 3 \
---nodes-min 1 \
---nodes-max 4 \
---node-ami <ami-id>
---BootstrapArguments --pause-container-account 940911992744
-```
+  **Note**: If you do not provide a keypair here, the AWS CloudFormation stack creation fails.
 
-3. Record the **NodeInstanceRole** for your node group.
+  * **VpcId**: Enter the ID for the VPC that you created in Create your Amazon EKS Cluster VPC.
+  * **Subnets**: Choose the subnets that you created in Create your Amazon EKS Cluster VPC.
+  * **NodeSecurityGroup**: Choose the security group that your linux node is part of.
+
+6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
+7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
+8. When your stack has finished creating, select it in the console and choose the **Outputs** tab.
+9. Record the **NodeInstanceRole** for the node group that was created. You need this when you configure your Amazon EKS worker nodes.
 
 ### Step 6. Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
 1. Download the configuration map
