@@ -75,7 +75,7 @@ Create an EKS cluster with a single linux worker node using the following eksctl
 
 ```
 eksctl create cluster \
---name prod \
+--name a1-preview \
 --version 1.12 \
 --nodegroup-name standard-workers \
 --node-type t3.medium \
@@ -91,17 +91,28 @@ Test that your cluster is running using `kubectl get svc`.
 
 ### Step 4. Deploy ARM CNI Plugin
 1. Check that your Linux worker node joined the cluster: `kubectl get nodes`
-2. Download vpc resource controller configuration file locally:
-`wget https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/aws-k8s-cni-arm64.yaml`
-3. Deploy the vpc-resource-controller: `kubectl apply -f aws-k8s-cni-arm64.yaml`
+2. Deploy the vpc-resource-controller: `kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-k8s-cni-arm64.yaml`
 
 ### Step 5. Launch and Configure Amazon EKS ARM Worker Nodes
-1.
+1. Choose the correct AMI ID for your region from the [AMI table](#latest-eks-a1-amis)
+2. Create a nodegroup using EKSctl for your A1 AMIs, be sure to fill in your AMI ID.
 
+```
+eksctl create nodegroup --cluster a1-preview \
+--name a1-nodes
+--node-type a1.medium \
+--nodes 3 \
+--nodes-min 1 \
+--nodes-max 4 \
+--node-ami <ami-id>
+--BootstrapArguments --pause-container-account 940911992744
+```
+
+3. Record the **NodeInstanceRole** for your node group.
 
 ### Step 6. Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
 1. Download the configuration map
-`wget https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/aws-auth-cm-arm64.yaml`
+`wget https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-auth-cm-arm64.yaml`
 
 2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile)>_ snippet with the **NodeInstanceRole** value that you recorded in the previous procedure, and save the file.
 
@@ -126,7 +137,7 @@ data:
 
 **Note**: If you receive the error `"aws-iam-authenticator": executable file not found in PATH`, then **kubectl** on your machine is not configured correctly for Amazon EKS. For more information, see [Installing aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
 
-If you receive any other authorization or resource type errors, see [Unauthorized or Access Denied (kubectl)](https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html#unauthorized). 
+If you receive any other authorization or resource type errors, see [Unauthorized or Access Denied (kubectl)](https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html#unauthorized).
 
 4. Watch the status of your nodes and wait for them to reach the **Ready** status: `kubectl get nodes --watch`
 
