@@ -16,7 +16,6 @@ Using the instructions and assets in this repository folder is governed as a pre
 #### Leaving feedback and getting help
 * The assets and instructions in this repository are offered on an _as-is_ basis as part of a public preview program for new AWS service functionality.
 * Leave comments or questions on our [GitHub issue](https://github.com/aws/containers-roadmap/issues/264).
-* To send more detailed problem information or feedback directly to the EKS Windows preview team, email [eks-a1-preview@amazon.com](mailto:eks-a1-preview@amazon.com). _(Please give 24-48 hours for a reply.)_
 * For issues with the Amazon EKS service (creating, modifying, deleting a cluster) or with your AWS account, please contact AWS support using the AWS console.
 
 ## Before you begin
@@ -26,6 +25,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 
 **Important Considerations for ARM nodes**
 * EKS currently supports running A1 instances with Kubernetes version 1.12 only
+* EC2 A1 instances are not available in all AWS regions. See the [AWS website for region availability](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/). You must create your cluster in one of the regions listed below.
 * VPC resource controller and coredns will be running in x86_64 node
 
 ## Key Resources
@@ -37,21 +37,9 @@ The specific resources you need to run containers on EC2 A1 instances with Amazo
 
 |  Region         | EKS Optimized AMI ID  |                                        
 | --------------- | --------------------  |
-| ap-northeast-1 	| ami-0a42ad9c1fe6baea0 |
-| ap-northeast-2 	| ami-095f645bf91f3c86d |
-| p-south-1       | ami-0e2a734b3e8ddcc02 |
-| ap-southeast-1  | ami-04bdd6a19a2b7f5f9 |
-| ap-southeast-2  | ami-07913747b3a60dc99 |
-| ca-central-1    | ami-08fed1c771f5f08e2 |
-| eu-central-1 	  | ami-083f7885e39e64013 |
-| eu-north-1   	  | ami-0dc496f6339c15efb |
 | eu-west-1    	  | ami-0d4aed258d782efc4 |
-| eu-west-2    	  | ami-019917add06c6e302 |
-| eu-west-3      	| ami-09e44f67871ddc702 |
-| sa-east-1       | ami-0d9650de0ddb605b7 |
 | us-east-1    	  | ami-01b50e73cd22564a2 |
 | us-east-2    	  | ami-0b77c47c7966395a6 |
-| us-west-1    	  | ami-011edf0d0b571fe0c |
 | us-west-2    	  | ami-032f6f730a078ac1d |
 
 
@@ -61,6 +49,8 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 **Note**: This guide requires that you create a new EKS cluster. Please ensure you complete all steps to avoid issues.
 
 ### Step 1. Install eksctl, the EKS command line tool
+To create our cluster, we will use [eksctl](https://eksctl.io/), a command line tool for EKS.
+
 1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed.
 If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 2. Install the Weaveworks Homebrew tap: `brew tap weaveworks/tap`
@@ -77,6 +67,7 @@ Create an EKS cluster with a single linux worker node using the following eksctl
 eksctl create cluster \
 --name a1-preview \
 --version 1.12 \
+--region <eu-west-1, us-east-1, us-east-2, us-west-2> \
 --nodegroup-name standard-workers \
 --node-type t3.medium \
 --nodes 1 \
@@ -165,8 +156,6 @@ Launch the demo Guest Book application from the [EKS Getting Started Guide](http
 
 * Run your own containers on your new EKS cluster.
 
-* Leave comments or questions on our [GitHub issue](https://github.com/aws/containers-roadmap/issues/69).
-
-* To send more detailed problem information or feedback directly to the EKS preview team, email [eks-a1-preview@amazon.com](mailto:eks-a1-preview@amazon.com). _(Please give 24-48 hours for a reply.)_
+* Leave comments or questions on our [GitHub issue](https://github.com/aws/containers-roadmap/issues/264).
 
 * This is an evolving project. As we roll out new features and functionality, we will update this repository and the roadmap issue.
