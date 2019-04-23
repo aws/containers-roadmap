@@ -150,7 +150,67 @@ If you receive any other authorization or resource type errors, see [Unauthorize
 ### Step 7. Launch an app
 Launch the demo Guest Book application from the [EKS Getting Started Guide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
-1. Create the Redis master replication controller.
+    1. Create the Redis master replication controller.
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-controller.json
+
+    Output:
+
+    replicationcontroller "redis-master" created
+
+    Create the Redis master service.
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-service.json
+
+    Output:
+
+    service "redis-master" created
+
+    Create the Redis slave replication controller.
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-controller.json
+
+    Output:
+
+    replicationcontroller "redis-slave" created
+
+    Create the Redis slave service.
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-service.json
+
+    Output:
+
+    service "redis-slave" created
+
+    Create the guestbook replication controller.
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-controller.json
+
+    Output:
+
+    replicationcontroller "guestbook" created
+
+    Create the guestbook service.
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-service.json
+
+    Output:
+
+    service "guestbook" created
+
+    Query the services in your cluster and wait until the External IP column for the guestbook service is populated.
+
+    Note
+    It may take several minutes before the IP address is available.
+
+    kubectl get services -o wide
+
+    After your external IP address is available, point a web browser to that address at port 3000 to view your guest book.
+
+    For example, http://a7a95c2b9e69711e7b1a3022fdcfdf2e-1985673473.us-west-2.elb.amazonaws.com:3000
+
+    Note
+    It may take several minutes for DNS to propagate and for your guest book to show up.
 
 ## Next steps
 
