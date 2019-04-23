@@ -153,50 +153,40 @@ Launch the demo Guest Book application from the [EKS Getting Started Guide](http
 1. Create the Redis master replication controller.
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-controller.json`
 
- Output:
-`replicationcontroller "redis-master" created`
+ * Output:
+ `replicationcontroller "redis-master" created`
 
 2. Create the Redis master service.
-
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-service.json`
 
-Output:
+ * Output:
+ `service "redis-master" created`
 
-`service "redis-master" created`
+3. Create the Redis slave replication controller.
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-controller.json`
 
-Create the Redis slave replication controller.
+ * Output:
+ `replicationcontroller "redis-slave" created`
 
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-controller.json
+4. Create the Redis slave service.
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-service.json`
 
-Output:
+ * Output:
+ `service "redis-slave" created`
 
-replicationcontroller "redis-slave" created
+5. Create the guestbook replication controller.
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-controller.json`
 
-Create the Redis slave service.
+ * Output:
+ `replicationcontroller "guestbook" created`
 
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-service.json
+6. Create the guestbook service.
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-service.json`
 
-Output:
+ * Output:
+ `service "guestbook" created`
 
-service "redis-slave" created
-
-Create the guestbook replication controller.
-
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-controller.json
-
-Output:
-
-replicationcontroller "guestbook" created
-
-Create the guestbook service.
-
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-service.json
-
-Output:
-
-service "guestbook" created
-
-Query the services in your cluster and wait until the External IP column for the guestbook service is populated.
+7. Query the services in your cluster and wait until the External IP column for the guestbook service is populated.
 
 **Note**: It may take several minutes before the IP address is available.
 
