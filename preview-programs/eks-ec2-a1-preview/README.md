@@ -153,7 +153,7 @@ Launch the demo Guest Book application from the [EKS Getting Started Guide](http
 1. Create the Redis master replication controller.
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-controller.json`
 
- * Output:
+ Output:
 `replicationcontroller "redis-master" created`
 
 2. Create the Redis master service.
