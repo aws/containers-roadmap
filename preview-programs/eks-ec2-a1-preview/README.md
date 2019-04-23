@@ -62,9 +62,13 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 
 ### Step 1. Install eksctl, the EKS command line tool
 1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed
+
 If you don't have Homebrew, you can install it by running `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
 2. Install the Weaveworks Homebrew tap: `brew tap weaveworks/tap`
+
 3. Install ekstctl `brew install weaveworks/tap/eksctl`
+
 4. Test that your installation was successful: `eksctl --help`
 
 ### Step 2. Install kubectl and AWS IAM authenticator
@@ -91,9 +95,13 @@ Test that your cluster is running using `kubectl get svc`.
 
 ### Step 4. Deploy ARM CNI Plugin
 1. Check that your Linux worker node joined the cluster: `kubectl get nodes`
+
 2. Download vpc resource controller configuration file locally:
+
 `wget https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/aws-k8s-cni-arm64.yaml`
+
 3. Deploy the vpc-resource-controller:
+
 `kubectl apply -f aws-k8s-cni-arm64.yaml`
 
 ### Step 5. Launch and Configure Amazon EKS ARM Worker Nodes
