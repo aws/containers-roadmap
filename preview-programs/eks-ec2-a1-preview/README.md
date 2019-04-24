@@ -37,11 +37,10 @@ The specific resources you need to run containers on EC2 A1 instances with Amazo
 
 |  Region         | EKS Optimized AMI ID  |                                        
 | --------------- | --------------------  |
-| eu-west-1    	  | ami-0d4aed258d782efc4 |
-| us-east-1    	  | ami-01b50e73cd22564a2 |
-| us-east-2    	  | ami-0b77c47c7966395a6 |
-| us-west-2    	  | ami-032f6f730a078ac1d |
-
+| eu-west-1    	  | ami-0e0ca86e552d5a255 |
+| us-east-1    	  | ami-0deb321f7b1c07d4c |
+| us-east-2    	  | ami-0ef72f9111fdc5f97 |
+| us-west-2    	  | ami-08e10400108cec7e7 |
 
 ## Instructions
 Follow these instructions to create a Kubernetes cluster with Amazon EKS and start a service on EC2 A1 nodes.
