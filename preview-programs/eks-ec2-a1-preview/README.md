@@ -187,8 +187,8 @@ Launch the demo Guest Book application from the [EKS Getting Started Guide](http
 
 7. Query the services in your cluster and wait until the External IP column for the guestbook service is populated.
 
- * **Note**: It may take several minutes before the IP address is available.
  * `kubectl get services -o wide`
+ * **Note**: It may take several minutes before the IP address is available.
 
 After your external IP address is available, point a web browser to that address at port 3000 to view your guest book.
 For example, http://a7a95c2b9e69711e7b1a3022fdcfdf2e-1985673473.us-west-2.elb.amazonaws.com:3000
