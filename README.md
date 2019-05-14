@@ -14,6 +14,11 @@ We now have information for developer preview programs within this repository.
 * Participate in the EKS Windows preview [here](/preview-programs/eks-windows-preview).
 * Participate in the EC2 A1 Instances preview [here](/preview-programs/eks-ec2-a1-preview).
 
+## Security disclosures
+
+If you think you’ve found a potential security issue, please do not post it in the Issues.  Instead, please follow the instructions [here](https://aws.amazon.com/security/vulnerability-reporting/) or [email AWS security directly](mailto:aws-security@amazon.com).
+
+
 ## FAQs
 **Q: Why did you build this?**
 
