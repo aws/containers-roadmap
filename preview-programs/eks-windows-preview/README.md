@@ -101,7 +101,7 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
     **Note**
     If you do not provide a keypair, the AWS CloudFormation stack creation will fail.
 
-    * **LinuxNodeImageId**: Enter the current Amazon EKS Linux worker node AMI ID for your Region. The AMI IDs for the latest Amazon EKS-optimized AMI are shown [here](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#eks-launch-workers) (Refer to Kubernetes version 1.11).
+    * **LinuxNodeImageId**: Enter the current Amazon EKS Linux worker node AMI ID for your Region. The AMI IDs for the latest Amazon EKS-optimized AMI are shown [here](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html) (Refer to Kubernetes version 1.11).
     * **WindowsNodeAutoScalingGroupDesiredCapacity**: Enter the desired number of nodes to scale to when your stack is created.
     * **WindowsNodeAutoScalingGroupMaxSize**: Enter the maximum number of nodes that your worker node Auto Scaling group can scale out to.
     * **WindowsNodeAutoScalingGroupMinSize**: Enter the minimum number of nodes that your worker node Auto Scaling group can scale in to.
