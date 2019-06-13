@@ -129,9 +129,9 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
 2. Setup the vpc admission webhook
    * Download the required scripts and deployment files
 ```
-   curl -o webhook-create-signed-cert.sh https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/webhook-create-signed-cert.sh
-   curl -o webhook-patch-ca-bundle.sh https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/webhook-patch-ca-bundle.sh
-   curl -o vpc-admission-webhook-deployment.yaml https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/vpc-admission-webhook-deployment.yaml
+   curl -o webhook-create-signed-cert.sh https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/webhook-create-signed-cert.sh
+   curl -o webhook-patch-ca-bundle.sh https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/webhook-patch-ca-bundle.sh
+   curl -o vpc-admission-webhook-deployment.yaml https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/vpc-admission-webhook-deployment.yaml
 
    chmod +x webhook-create-signed-cert.sh
    chmod +x webhook-patch-ca-bundle.sh
