@@ -55,7 +55,7 @@ The specific resources you need to run Windows containers with Amazon EKS are wi
 
 **Note**: Windows Full AMI is the full Windows Server. Windows Core AMI is the smaller AMI that only includes components necessary to run containers. You can use either version as part of this guide.
 
-|  Region         | Server-2019-Engligh-Full-Container-EKS AMI ID | Server-2019-Engligh-Core-Container-EKS AMI ID  |                                        
+|  Region         | Server-2019-English-Full-Container-EKS AMI ID | Server-2019-English-Core-Container-EKS AMI ID  |
 | --------------- | --------------------------------------------- | ---------------------------------------------- |
 | us-west-2       |           ami-047f9f0be88cb9b8b               |              ami-0244aa185d17572b8             |
 | us-west-1       |           ami-0dca600383dc83e8e               |              ami-04a97de1d98e226fe             |
@@ -129,9 +129,9 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
 2. Setup the vpc admission webhook
    * Download the required scripts and deployment files
 ```
-   curl -o webhook-create-signed-cert.sh https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/webhook-create-signed-cert.sh
-   curl -o webhook-patch-ca-bundle.sh https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/webhook-patch-ca-bundle.sh
-   curl -o vpc-admission-webhook-deployment.yaml https://raw.githubusercontent.com/aws/containers-roadmap/preview-programs/eks-windows-preview/vpc-admission-webhook-deployment.yaml
+   curl -o webhook-create-signed-cert.sh https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/webhook-create-signed-cert.sh
+   curl -o webhook-patch-ca-bundle.sh https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/webhook-patch-ca-bundle.sh
+   curl -o vpc-admission-webhook-deployment.yaml https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-windows-preview/vpc-admission-webhook-deployment.yaml
 
    chmod +x webhook-create-signed-cert.sh
    chmod +x webhook-patch-ca-bundle.sh
@@ -139,19 +139,19 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
    
    * Setup secret for secure communication
 
-    `./webhook-create-signed-cert.sh`
+   `./webhook-create-signed-cert.sh`
 
    * Verify secret
 
-    `kubectl get secret vpc-admission-webhook-certs`
+   `kubectl get secret vpc-admission-webhook-certs`
 
    * Configure webhook and create deployment file
 
-    `cat ./vpc-admission-webhook-deployment.yaml| ./webhook-patch-ca-bundle.sh > vpc-admission-webhook.yaml`
+   `cat ./vpc-admission-webhook-deployment.yaml| ./webhook-patch-ca-bundle.sh > vpc-admission-webhook.yaml`
 
 3. Deploy the vpc-admission-webhook
 
-    `kubectl apply -f vpc-admission-webhook.yaml`
+`kubectl apply -f vpc-admission-webhook.yaml`
 
 ### 5. Enable worker nodes to join the cluster
 1. Download, edit, and apply the AWS authenticator configuration map
@@ -164,7 +164,7 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
    **Important:** Do not modify any other lines in this file.
 
 ```
-  apiVersion: v1
+apiVersion: v1
 kind: ConfigMap
 metadata:  
   name: aws-auth  
