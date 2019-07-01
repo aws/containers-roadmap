@@ -136,7 +136,7 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
    chmod +x webhook-create-signed-cert.sh
    chmod +x webhook-patch-ca-bundle.sh
 ```
-   
+
    * Setup secret for secure communication
 
    `./webhook-create-signed-cert.sh`
@@ -166,20 +166,20 @@ The Amazon EKS Windows preview works in [all regions where Amazon EKS is availab
 ```
 apiVersion: v1
 kind: ConfigMap
-metadata:  
-  name: aws-auth  
+metadata:
+  name: aws-auth
   namespace: kube-system
-data:  
-  mapRoles: |  
+data:
+  mapRoles: |
     - rolearn: <ARN of instance role (not instance profile) of **linux** node>
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
         - system:nodes
-    - rolearn: <ARN of instance role (not instance profile) of **windows** node>  
-      username: system:node:{{EC2PrivateDNSName}}  
-      groups:  
-        - system:bootstrappers  
+    - rolearn: <ARN of instance role (not instance profile) of **windows** node>
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
         - system:nodes
         - eks:kube-proxy-windows
 ```
