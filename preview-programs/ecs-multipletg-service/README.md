@@ -2,7 +2,7 @@
 
 Hello,  
   
-Thank you for participating in the early access preview for multiple target group support for ECS services. This document is meant to serve as an explanation of the feature and be a guide for getting on-boarded prior to having official documentation. Please send an email to akshram@amazon.com to get your account set up to test this feature.  
+Thank you for participating in the early access preview for multiple target group support for ECS services. This document is meant to serve as an explanation of the feature and be a guide for getting on-boarded prior to having official documentation. Please send an email to akshram@amazon.com with your AWS account ID(s) and AWS Region(s) to set up to testing of this feature.  
   
 We have heard from customers of two use cases 1) A task running as a part of an ECS service to serve traffic from internal and external facing load balancers 2) A task running as a part of an ECS service that exposes multiple ports for use cases such as an application port and an administrative port. With this preview feature, customers should be able to attach multiple target groups per ECS service, allowing for multiple load balancers or multiple load balanced ports attached to an ECS service.  
   
