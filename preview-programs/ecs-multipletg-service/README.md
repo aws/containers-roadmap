@@ -86,7 +86,7 @@ If you know your VPC and subnet, below is the CLI command to create the stack
 **2. Check you can access the target behind a load balancer**  
 
 -   `http://<EXTERNAL_ELB_LOAD_BALANCER_DNS> - Should be accessible from the browser`
--   ``http://<INTERNAL_ELB_LOAD_BALANCER_DNS> -  `- Should be accessible from only from within the VPC. You can check this by curling the URL through an EC2 instance in your VPC` ``
+-   `http://<INTERNAL_ELB_LOAD_BALANCER_DNS> - Should be accessible from only from within the VPC. You can check this by curling the URL through an EC2 instance in your VPC` 
 
 **3. Check the target are registered in both target groups**  
   
@@ -137,8 +137,8 @@ If you know your VPC and subnet, key name, below is the CLI command to create th
   
 **2. Check you can access the both customer application and admin application. You can get the DNSs from from the CloudFormation Outputs.**  
 
--   `http://<ELB1_LOAD_BALANCER_DNS>`- Should be accessible from your browser and be served by the first container
--   `http://<ELB2_LOAD_BALANCER_DNS>`- Should also be accessible from your browser and be served by the second container
+-   `http://<ELB1_LOAD_BALANCER_DNS> - Should be accessible from your browser and be served by the first container `
+-   `http://<ELB2_LOAD_BALANCER_DNS> - Should also be accessible from your browser and be served by the second container `
 
   
 **3. Check the target are registered in both target groups**  
