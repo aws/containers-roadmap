@@ -2,7 +2,7 @@
 
 Hello,  
   
-Thank you for participating in the early access preview for multiple target group support for ECS services. This document is meant to serve as an explanation of the feature and be a guide for getting on-boarded prior to having official documentation. Please send an email to akshram@amazon.com to get your account whitelisted for this feature.  
+Thank you for participating in the early access preview for multiple target group support for ECS services. This document is meant to serve as an explanation of the feature and be a guide for getting on-boarded prior to having official documentation. Please send an email to akshram@amazon.com to get your account set up to test this feature.  
   
 We have heard from customers of two use cases 1) A task running as a part of an ECS service to serve traffic from internal and external facing load balancers 2) A task running as a part of an ECS service that exposes multiple ports for use cases such as an application port and an administrative port. With this preview feature, customers should be able to attach multiple target groups per ECS service, allowing for multiple load balancers or multiple load balanced ports attached to an ECS service.  
   
@@ -154,7 +154,7 @@ If you know your VPC and subnet, key name, below is the CLI command to create th
 # FAQ
   
 **I am getting an error of “load balancers can have at most 1 items” when I deploy the CloudFormation stack. Why?**  
-This can happen if either your account is not whitelisted or your are testing in a region that the preview is currently not supported. Please reach out to akshram@amazon.com to ensure your account is whitelisted.  
+This can happen if either your account is not set up by reaching out to akshram@amazon.com or your are testing in a region that the preview is currently not supported.   
   
 **How can I leave Feedback for the AWS Container Services team?**  
 We would love to hear your feedback. Please add a comment on the Github [feature page](https://github.com/aws/containers-roadmap/issues/104) with a detailed description of the issue/feedback being faced.  
