@@ -52,6 +52,6 @@ A: We haven't worked out how pull requests should work for a public roadmap page
 
 ## License
 
-This library is licensed under the Apache 2.0 License.
+This library is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
 
 To learn more about the services, head here: http://aws.amazon.com/containers
