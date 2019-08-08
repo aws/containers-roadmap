@@ -57,22 +57,22 @@ The specific resources you need to run Windows containers with Amazon EKS are wi
 
 |  Region         | Server-2019-English-Full-Container-EKS AMI ID | Server-2019-English-Core-Container-EKS AMI ID  |
 | --------------- | --------------------------------------------- | ---------------------------------------------- |
-| us-west-2       |           ami-047f9f0be88cb9b8b               |              ami-0244aa185d17572b8             |
-| us-west-1       |           ami-0dca600383dc83e8e               |              ami-04a97de1d98e226fe             |
-| us-east-2       |           ami-0d25014b4e2b56ef0               |              ami-0134b9dc88d95105e             |
-| us-east-1       |           ami-0d4ec559ed3b0a03d               |              ami-032bdf5292844295a             |
-| sa-east-1       |           ami-0762395a2c696beba               |              ami-099df69dcf073a3fd             |
-| eu-west-3       |           ami-005543548e9d4126a               |              ami-0b0a0aba0d6f5bccb             |
-| eu-west-2       |           ami-0a9fb38fe97a64b6e               |              ami-0f6c6e5d4e4d01c64             |
-| eu-west-1       |           ami-07ffb428f41e17b71               |              ami-0cd07b7c0ae250af0             |
-| eu-north-1      |           ami-03bcc606bf2df8d2d               |              ami-074e35c9d14b11091             |
-| eu-central-1    |           ami-0c60c20c5f3e73d04               |              ami-07cefde331d18762e             |
-| ca-central-1    |           ami-090a238aa660f6f1e               |              ami-0050e658348c3a4cb             |
-| ap-southeast-2  |           ami-058bed43fa0d7e6e8               |              ami-074fab9fc535c1f82             |
-| ap-southeast-1  |           ami-0fefd03bb8473f13a               |              ami-0e0327c40f458981e             |
-| ap-south-1      |           ami-0c5caa6c28ed258ed               |              ami-050cbb5254365fdaf             |
-| ap-northeast-2  |           ami-00f43a9a837b9d1e3               |              ami-0fbb7a510d13e0c14             |
-| ap-northeast-1  |           ami-0c4de1c5133449009               |              ami-01e36132b6e450597             |
+| us-west-2       |           ami-0d8fe37c57ffcb1cb               |              ami-070545a832d840b39             |
+| us-west-1       |           ami-045f7d2976827c603               |              ami-0b6365aeb3a4c7bed             |
+| us-east-2       |           ami-0ea4b11850e39ea45               |              ami-087f4399676501cc5             |
+| us-east-1       |           ami-0d50009cca6b3931a               |              ami-09469be1febc3ccaa             |
+| sa-east-1       |           ami-056ee2bfe11770e0b               |              ami-09a98faec87472a01             |
+| eu-west-3       |           ami-0ba98761c56cbbde4               |              ami-0bd875fb0dfbdfde9             |
+| eu-west-2       |           ami-04679d5532fcb80a1               |              ami-076e3a7505911ebbe             |
+| eu-west-1       |           ami-0251127b78f4417d0               |              ami-00f116bc27664b5ca             |
+| eu-north-1      |           ami-0ce584f71aecdcbbb               |              ami-014da0d238c71afc2             |
+| eu-central-1    |           ami-052759c2c4cfcc018               |              ami-0b34353e0be33b6cc             |
+| ca-central-1    |           ami-0c4cf918855bab556               |              ami-0406cee5903b280c4             |
+| ap-southeast-2  |           ami-078946ad0e72394aa               |              ami-08d971022fd230af2             |
+| ap-southeast-1  |           ami-0171c286f494f6eee               |              ami-08595c683d421d64a             |
+| ap-south-1      |           ami-08a4d85769014678c               |              ami-0112fbd4a4e198f3e             |
+| ap-northeast-2  |           ami-0bdc11c7431ad3359               |              ami-07bc6510a032017e4             |
+| ap-northeast-1  |           ami-0c7d532e61ed68389               |              ami-0785aee1ddf5ebf5e             |
 
 
 ## Instructions
