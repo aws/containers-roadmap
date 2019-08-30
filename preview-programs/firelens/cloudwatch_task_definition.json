@@ -1,0 +1,30 @@
+{
+	"family": "firelens-example-cloudwatch",
+	"containerDefinitions": [
+		{
+			"essential": true,
+			"image": "amazon/aws-for-fluent-bit:latest",
+			"name": "log_router",
+			"firelensConfiguration": {
+				"type": "fluentbit"
+			},
+			"memory": 25
+		 },
+		 {
+			 "essential": true,
+			 "image": "nginx",
+			 "name": "app",
+			 "logConfiguration": {
+				 "logDriver":"awsfirelens",
+				 "options": {
+					"Name": "cloudwatch",
+					"region": "us-west-2",
+					"log_group_name": "firelens-testing-fluent-bit",
+					"auto_create_group": "true",
+					"log_stream_prefix": "from-fluent-bit"
+				}
+			},
+			"memory": 100
+		}
+	]
+}
