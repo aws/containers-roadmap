@@ -2,7 +2,7 @@
 
 Start here to participate in the FireLens preview program for [Amazon Elastic Container Service (ECS)](https://aws.amazon.com/ecs). FireLens is available for ECS tasks using the EC2 and Fargate launch types.
 
-FireLens is a managed integration with [Fluentd](https://www.fluentd.org/) and [Fluent Bit](https://fluentbit.io/)- open source CNCF log routing projects. With FireLens, you can route your logs to a large number of AWS and partner destinations using simple configuration in your ECS Task Definition.
+FireLens works with [Fluentd](https://www.fluentd.org/) and [Fluent Bit](https://fluentbit.io/). With FireLens, you can route your logs to a large number of AWS and partner destinations using simple configuration in your ECS Task Definition.
 
 We are providing FireLens with a basic set of functionality as a public preview to allow you to test it out, and give us feedback. Once we announce the general availability of FireLens it will be ready for production workloads, and will support more uses cases.
 
