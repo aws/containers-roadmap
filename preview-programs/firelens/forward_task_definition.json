@@ -1,0 +1,28 @@
+{
+	"family": "firelens-example-forward",
+	"containerDefinitions": [
+		{
+			"essential": true,
+			"image": "amazon/aws-for-fluent-bit:latest",
+			"name": "log_router",
+			"firelensConfiguration": {
+				"type": "fluentbit"
+			},
+			"memory": 25
+		 },
+		 {
+			 "essential": true,
+			 "image": "httpd",
+			 "name": "app",
+			 "logConfiguration": {
+				 "logDriver":"awsfirelens",
+				 "options": {
+					"Name": "forward",
+					"Host": "fluentdhost",
+					"Port": "24224"
+				}
+			},
+			"memory": 100
+		}
+	]
+}

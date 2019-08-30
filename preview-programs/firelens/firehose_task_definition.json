@@ -1,0 +1,28 @@
+{
+	"family": "firelens-example-firehose",
+	"containerDefinitions": [
+		{
+			"essential": true,
+			"image": "amazon/aws-for-fluent-bit:latest",
+			"name": "log_router",
+			"firelensConfiguration": {
+				"type": "fluentbit"
+			},
+			"memory": 25
+		 },
+		 {
+			 "essential": true,
+			 "image": "httpd",
+			 "name": "app",
+			 "logConfiguration": {
+				 "logDriver":"awsfirelens",
+				 "options": {
+					"Name": "firehose",
+					"region": "us-west-2",
+					"delivery_stream": "my-stream"
+				}
+			},
+			"memory": 100
+		}
+	]
+}
