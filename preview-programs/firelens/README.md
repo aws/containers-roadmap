@@ -35,7 +35,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 
 FireLens is supported in all regions where Amazon ECS is supported. FireLens for ECS Tasks using the Fargate Launch Type is supported in all AWS Fargate regions.
 
-During the public preview, creating FireLens Task Definitions is supported via the AWS SDKs, and AWS CLI. You can also configure Task Definitions using the Amazon ECS Console if you configure them directly via JSON.
+During the public preview, creating FireLens Task Definitions is only supported via the AWS SDKs, and AWS CLI. 
 
 FireLens is supported in the bridge, host, and awsvpc network modes.
 
