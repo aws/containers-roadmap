@@ -1,5 +1,6 @@
 {
 	"family": "firelens-example-firehose",
+	"taskRoleArn": "arn:aws:iam::XXXXXXXXXXXX:role/ecs_task_iam_role",
 	"containerDefinitions": [
 		{
 			"essential": true,
