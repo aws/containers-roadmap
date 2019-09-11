@@ -78,34 +78,7 @@ When enabled, a log event will look like the following:
 
 We recommend that you use Fluent Bit as your log router because its resource utilization is significantly lower than Fluentd. AWS provides a Fluent Bit image with plugins for [CloudWatch Logs](https://github.com/aws/amazon-cloudwatch-logs-for-fluent-bit) and [Kinesis Firehose](https://github.com/aws/amazon-kinesis-firehose-for-fluent-bit).
 
-This image is available on [Docker Hub](https://hub.docker.com/r/amazon/aws-for-fluent-bit), however, we recommend that you use the regionalized [Amazon ECR](https://aws.amazon.com/ecr/) image repositories because they provide higher availability.
-
-
-| Region         | Registry ID  | Full Image Names                                                          |
-|----------------|--------------|-------------------------------------------------------------------------|
-| us-east-1      | 906394416424 | 906394416424.dkr.us-east-1.amazonaws.com/aws-for-fluent-bit:latest      |
-| eu-west-1      | 906394416424 | 906394416424.dkr.eu-west-1.amazonaws.com/aws-for-fluent-bit:latest      |
-| us-west-1      | 906394416424 | 906394416424.dkr.us-west-1.amazonaws.com/aws-for-fluent-bit:latest      |
-| ap-southeast-1 | 906394416424 | 906394416424.dkr.ap-southeast-1.amazonaws.com/aws-for-fluent-bit:latest |
-| ap-northeast-1 | 906394416424 | 906394416424.dkr.ap-northeast-1.amazonaws.com/aws-for-fluent-bit:latest |
-| us-west-2      | 906394416424 | 906394416424.dkr.us-west-2.amazonaws.com/aws-for-fluent-bit:latest      |
-| sa-east-1      | 906394416424 | 906394416424.dkr.sa-east-1.amazonaws.com/aws-for-fluent-bit:latest      |
-| ap-southeast-2 | 906394416424 | 906394416424.dkr.ap-southeast-2.amazonaws.com/aws-for-fluent-bit:latest |
-| eu-central-1   | 906394416424 | 906394416424.dkr.eu-central-1.amazonaws.com/aws-for-fluent-bit:latest   |
-| ap-northeast-2 | 906394416424 | 906394416424.dkr.ap-northeast-2.amazonaws.com/aws-for-fluent-bit:latest |
-| ap-south-1     | 906394416424 | 906394416424.dkr.ap-south-1.amazonaws.com/aws-for-fluent-bit:latest     |
-| us-east-2      | 906394416424 | 906394416424.dkr.us-east-2.amazonaws.com/aws-for-fluent-bit:latest      |
-| ca-central-1   | 906394416424 | 906394416424.dkr.ca-central-1.amazonaws.com/aws-for-fluent-bit:latest   |
-| eu-west-2      | 906394416424 | 906394416424.dkr.eu-west-2.amazonaws.com/aws-for-fluent-bit:latest      |
-| eu-west-3      | 906394416424 | 906394416424.dkr.eu-west-3.amazonaws.com/aws-for-fluent-bit:latest      |
-| ap-northeast-3 | 906394416424 | 906394416424.dkr.ap-northeast-3.amazonaws.com/aws-for-fluent-bit:latest |
-| eu-north-1     | 906394416424 | 906394416424.dkr.eu-north-1.amazonaws.com/aws-for-fluent-bit:latest     |
-| ap-east-1      | 449074385750 | 449074385750.dkr.ap-east-1.amazonaws.com/aws-for-fluent-bit:latest      |
-| cn-north-1     | 128054284489 | 128054284489.dkr.cn-north-1.amazonaws.com.cn/aws-for-fluent-bit:latest     |
-| cn-northwest-1 | 128054284489 | 128054284489.dkr.cn-northwest-1.amazonaws.com.cn/aws-for-fluent-bit:latest |
-| us-gov-east-1  | 161423150738 | 161423150738.dkr.us-gov-east-1.amazonaws.com/aws-for-fluent-bit:latest  |
-| us-gov-west-1  | 161423150738 | 161423150738.dkr.us-gov-west-1.amazonaws.com/aws-for-fluent-bit:latest  |
-
+This image is available on [Docker Hub](https://hub.docker.com/r/amazon/aws-for-fluent-bit).
 
 ## FireLens Task Definitions
 
