@@ -9,7 +9,16 @@
 			"firelensConfiguration": {
 				"type": "fluentbit"
 			},
-			"memory": 25
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "firelens-container",
+					"awslogs-region": "us-west-2",
+					"awslogs-create-group": "true",
+					"awslogs-stream-prefix": "firelens"
+				}
+			},
+			"memoryReservation": 50
 		 },
 		 {
 			 "essential": true,
@@ -23,7 +32,7 @@
 					"delivery_stream": "my-stream"
 				}
 			},
-			"memory": 100
+			"memoryReservation": 100
 		}
 	]
 }

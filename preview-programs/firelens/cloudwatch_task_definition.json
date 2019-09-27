@@ -4,12 +4,21 @@
 	"containerDefinitions": [
 		{
 			"essential": true,
-			"image": "amazon/aws-for-fluent-bit:latest",
+			"image": "906394416424.dkr.ecr.us-east-1.amazonaws.com/aws-for-fluent-bit:latest",
 			"name": "log_router",
 			"firelensConfiguration": {
 				"type": "fluentbit"
 			},
-			"memory": 25
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "firelens-container",
+					"awslogs-region": "us-west-2",
+					"awslogs-create-group": "true",
+					"awslogs-stream-prefix": "firelens"
+				}
+			},
+			"memoryReservation": 50
 		 },
 		 {
 			 "essential": true,
@@ -25,7 +34,7 @@
 					"log_stream_prefix": "from-fluent-bit"
 				}
 			},
-			"memory": 100
+			"memoryReservation": 100
 		}
 	]
 }
