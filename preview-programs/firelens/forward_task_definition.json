@@ -1,5 +1,6 @@
 {
 	"family": "firelens-example-forward",
+	"taskRoleArn": "arn:aws:iam::XXXXXXXXXXXX:role/ecs_task_iam_role",
 	"containerDefinitions": [
 		{
 			"essential": true,
@@ -8,7 +9,16 @@
 			"firelensConfiguration": {
 				"type": "fluentbit"
 			},
-			"memory": 25
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "firelens-container",
+					"awslogs-region": "us-west-2",
+					"awslogs-create-group": "true",
+					"awslogs-stream-prefix": "firelens"
+				}
+			},
+			"memoryReservation": 50
 		 },
 		 {
 			 "essential": true,
@@ -22,7 +32,7 @@
 					"Port": "24224"
 				}
 			},
-			"memory": 100
+			"memoryReservation": 100
 		}
 	]
 }
