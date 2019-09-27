@@ -1,5 +1,9 @@
 # Multiple target groups for ECS services preview!
 
+This feature is now generally avaliable learn more here: https://aws.amazon.com/about-aws/whats-new/2019/07/amazon-ecs-services-now-support-multiple-load-balancer-target-groups/
+
+
+
 Hello,  
   
 Thank you for participating in the early access preview for multiple target group support for ECS services. This document is meant to serve as an explanation of the feature and be a guide for getting on-boarded prior to having official documentation. Please send an email to akshram@amazon.com with your AWS account ID(s) and AWS Region(s) to set up to testing of this feature.  
