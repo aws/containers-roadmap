@@ -25,7 +25,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 
 **Important Considerations for ARM nodes**
 * EKS currently supports running A1 instances with Kubernetes version 1.12 only
-* EC2 A1 instances are not available in all AWS regions. See the [AWS website for region availability](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/). You must create your cluster in one of the regions listed below.
+* The preview is only available in us-west-2. You must create your EKS cluster in this region.
 * VPC resource controller and coredns will be running in x86_64 node
 
 ## Key Resources
@@ -37,9 +37,6 @@ The specific resources you need to run containers on EC2 A1 instances with Amazo
 
 |  Region         | EKS Optimized AMI ID  |                                        
 | --------------- | --------------------  |
-| eu-west-1    	  | ami-0e0ca86e552d5a255 |
-| us-east-1    	  | ami-0deb321f7b1c07d4c |
-| us-east-2    	  | ami-0ef72f9111fdc5f97 |
 | us-west-2    	  | ami-08e10400108cec7e7 |
 
 ## Instructions
@@ -48,7 +45,7 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 **Note**: This guide requires that you create a new EKS cluster. Please ensure you complete all steps to avoid issues.
 
 ### Step 1. Install eksctl, the EKS command line tool
-To create our cluster, we will use [eksctl](https://eksctl.io/), a command line tool for EKS.
+To create our cluster, we will use [eksctl](https://eksctl.io/), the command line tool for EKS.
 
 1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed.
 If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
