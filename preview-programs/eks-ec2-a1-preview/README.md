@@ -25,7 +25,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 
 **Important Considerations for ARM nodes**
 * EKS currently supports running A1 instances with Kubernetes version 1.12 only
-* The EKS ARM preview is only available in us-west-2. You must create your EKS cluster in this region.
+* The preview is only available in us-west-2. You must create your EKS cluster in this region.
 * VPC resource controller and coredns will be running in x86_64 node
 
 ## Key Resources
