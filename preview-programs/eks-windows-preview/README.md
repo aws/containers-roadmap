@@ -1,3 +1,7 @@
+# WARNING: This preview program is deprecated and no longer maintained.
+
+## Windows worker nodes are now fully supported by Amazon Elastic Kubernetes Service (EKS). See the [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html) for instructions on getting started with launching Windows worker nodes and containers in your cluster.
+
 # Amazon EKS Windows Preview Program
 Start here to participate in the Windows node preview program for [Amazon Elastic Container Service for Kubernetes (EKS)](https://aws.amazon.com/eks). Using the instructions and code in this repository you can run Windows server docker containers on a Kubernetes cluster that is managed by Amazon EKS.
 
