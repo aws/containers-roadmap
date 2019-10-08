@@ -45,7 +45,7 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 **Note**: This guide requires that you create a new EKS cluster. Please ensure you complete all steps to avoid issues.
 
 ### Step 1. Install eksctl, the EKS command line tool
-To create our cluster, we will use [eksctl](https://eksctl.io/), a command line tool for EKS.
+To create our cluster, we will use [eksctl](https://eksctl.io/), the command line tool for EKS.
 
 1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed.
 If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
