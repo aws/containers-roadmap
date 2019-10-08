@@ -25,7 +25,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 
 **Important Considerations for ARM nodes**
 * EKS currently supports running A1 instances with Kubernetes version 1.12 only
-* EC2 A1 instances are not available in all AWS regions. See the [AWS website for region availability](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/). You must create your cluster in one of the regions listed below.
+* The EKS ARM preview is only available in us-west-2. You must create your EKS cluster in this region.
 * VPC resource controller and coredns will be running in x86_64 node
 
 ## Key Resources
@@ -37,9 +37,6 @@ The specific resources you need to run containers on EC2 A1 instances with Amazo
 
 |  Region         | EKS Optimized AMI ID  |                                        
 | --------------- | --------------------  |
-| eu-west-1    	  | ami-0e0ca86e552d5a255 |
-| us-east-1    	  | ami-0deb321f7b1c07d4c |
-| us-east-2    	  | ami-0ef72f9111fdc5f97 |
 | us-west-2    	  | ami-08e10400108cec7e7 |
 
 ## Instructions
