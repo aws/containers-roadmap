@@ -105,8 +105,7 @@ Test that your cluster is running using `kubectl get svc`.
 
   * **VpcId**: Enter the ID for the VPC that you created in Create your Amazon EKS Cluster VPC.
   * **Subnets**: Choose the subnets that you created in Create your Amazon EKS Cluster VPC.
-  * **NodeSecurityGroup**: Choose the security group that your linux node is part of.
-
+  
 6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
 7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
 8. When your stack has finished creating, select it in the console and choose the **Outputs** tab.
@@ -128,7 +127,7 @@ metadata:
   namespace: kube-system
 data:  
   mapRoles: |  
-    - rolearn: <ARN of instance role (not instance profile) of **linux** node>
+    - rolearn: <ARN of instance role (not instance profile) of **ARM64** nodes from step 6>
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
