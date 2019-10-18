@@ -76,11 +76,15 @@ This process typically takes 10-15 minutes. You can monitor the progress in the 
 
 Test that your cluster is running using `kubectl get svc`.
 
-### Step 4. Deploy ARM CNI Plugin
+### Step 4. Record the x86 instance profile ARN
+1. After the x86 worker node stack has finished creating, select it in the console and choose the **Outputs** tab.
+2. Record the value of **InstanceRoleARN** for the node group that was created. You need this when you configure your Amazon EKS worker nodes in step 8.
+
+### Step 5. Deploy ARM CNI Plugin
 1. Check that your Linux worker node joined the cluster: `kubectl get nodes`
 2. Deploy the vpc-resource-controller: `kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-k8s-cni-arm64.yaml`
 
-### Step 5. Launch and Configure Amazon EKS ARM Worker Nodes
+### Step 6. Launch and Configure Amazon EKS ARM Worker Nodes
 1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation. Ensure that you are in the AWS region that you created your EKS cluster in.
 2. Choose **Create stack**.
 3. For **Choose a template**, select **Specify an Amazon S3 template URL**.
@@ -105,18 +109,19 @@ Test that your cluster is running using `kubectl get svc`.
 
   * **VpcId**: Enter the ID for the VPC that you created in Create your Amazon EKS Cluster VPC.
   * **Subnets**: Choose the subnets that you created in Create your Amazon EKS Cluster VPC.
-  * **NodeSecurityGroup**: Choose the security group that your linux node is part of.
-
+  
 6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
 7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
-8. When your stack has finished creating, select it in the console and choose the **Outputs** tab.
-9. Record the **NodeInstanceRole** for the node group that was created. You need this when you configure your Amazon EKS worker nodes.
 
-### Step 6. Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
+### Step 7. Record the ARM64 instance role ARN.
+1. After the ARM worker nodes stack has finished creating, select it in the console and choose the **Outputs** tab.
+2. Record the value of **NodeInstanceRole** for the node group that was created. You need this when you configure your Amazon EKS worker nodes in step 8.
+
+### Step 8. Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
 1. Download the configuration map
 `wget https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-auth-cm-arm64.yaml`
 
-2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile)>_ snippet with the **NodeInstanceRole** value that you recorded in the previous procedure, and save the file.
+2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile)>_ snippets with the **NodeInstanceRole** values that you recorded from steps 3 and 5 in the previous procedure, and save the file.
 
 **Important**: Do not modify any other lines in this file.
 
@@ -128,7 +133,12 @@ metadata:
   namespace: kube-system
 data:  
   mapRoles: |  
-    - rolearn: <ARN of instance role (not instance profile) of **linux** node>
+    - rolearn: <ARN of instance role (not instance profile) of **x86** node from step 4> 
+      username: system:node:{{EC2PrivateDNSName}} 
+      groups: 
+        - system:bootstrappers 
+        - system:nodes 
+    - rolearn: <ARN of instance role (not instance profile) of **ARM64** nodes from step 7>
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
