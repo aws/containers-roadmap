@@ -6,9 +6,7 @@ FireLens works with [Fluentd](https://www.fluentd.org/) and [Fluent Bit](https:/
 
 We are providing FireLens with a basic set of functionality as a public preview to allow you to test it out, and give us feedback. Once we announce the general availability of FireLens it will be ready for production workloads, and will support more uses cases.
 
-**Note:** The assets and instructions in this repository folder are offered as part of a _public preview_ program administered by AWS.
-
-Using the instructions and assets in this repository folder is governed as a preview program under the [AWS Service Terms](https://aws.amazon.com/service-terms/).
+**Note:** FireLens is no longer under public preview. The feature is generally available. Please see the [official AWS Documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html).
 
 #### Contents
 * [Leaving feedback and getting help](#leaving-feedback-and-getting-help)
