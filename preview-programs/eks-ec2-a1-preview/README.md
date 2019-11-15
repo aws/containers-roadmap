@@ -32,8 +32,6 @@ The specific resources you need to run containers on EC2 A1 instances with Amazo
 
 ### Latest EKS A1 AMIs
 
-**Kubernetes 1.13/1.14**
-
 |  Region         | Kubernetes Version    | EKS Optimized AMI ID  |                                        
 | --------------- | --------------------- | --------------------- |
 | us-west-2    	  | 1.13                  | ami-05546e5b2e87ae067 |
@@ -112,7 +110,10 @@ kubectl set image daemonset.apps/kube-proxy \
 kube-proxy=940911992744.dkr.ecr.us-west-2.amazonaws.com/eks/kube-proxy-arm64:v1.14.7
 ```
 
-### **Step 6.** Patch the aws-node DaemonSet to use the ARM CNI plugin
+### *Step 6.* Deploy the ARM CNI Plugin
+Deploy the vpc-resource-controller: kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-k8s-cni-arm64.yaml
+
+### **Step 7.** Patch the aws-node DaemonSet to use the ARM CNI plugin
 Run the below command to install the AWS ARM64 CNI Plugin (this command will work for both 1.13 as well as 1.14):
 ```shell
 kubectl patch daemonset aws-node \
@@ -120,7 +121,7 @@ kubectl patch daemonset aws-node \
 -p '{"spec": {"template": {"spec": {"containers": [{"image": "940911992744.dkr.ecr.us-west-2.amazonaws.com/amazon-k8s-cni-arm64:v1.5.3","name":"aws-node"}]}}}}'
 ```
 
-### **Step 7.** Update the node affinity of Kube-Proxy, AWS-Node, and CoreDNS
+### **Step 8.** Update the node affinity of Kube-Proxy, AWS-Node, and CoreDNS
 Before we launch our A1 instances, we will need to udpate the node affinity for the Kube-Proxy, AWS-Node, and CoreDNS. After running each of the commands below, an editor will open (e.g.: vi for Linux or MacOS clients, notepad for Windows clients). Once the editor has opened, scroll down to the bottom of the file to where the node affinity is defined. In each case, update the value of `amd64` to `arm64` (see example below):
 
 **Example: Updating the affinity for kube-proxy**
@@ -158,7 +159,8 @@ kubectl -n kube-system edit ds kube-proxy
 kubectl -n kube-system edit ds aws-node
 kubectl -n kube-system edit deployment coredns
 ```
-### *Step 8.* Launch and Configure Amazon EKS ARM Worker Nodes
+
+### *Step 9.* Launch and Configure Amazon EKS ARM Worker Nodes
 1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation. Ensure that you are in the AWS region that you created your EKS cluster in.
 2. Choose **Create stack**.
 3. For **Choose a template**, select **Specify an Amazon S3 template URL**.
@@ -187,15 +189,15 @@ kubectl -n kube-system edit deployment coredns
 6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
 7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
 
-### **Step 9.** Record the ARM64 instance role ARN.
+### **Step 10.** Record the ARM64 instance role ARN.
 1. After the ARM worker nodes stack has finished creating, select it in the console and choose the **Outputs** tab.
-2. Record the value of **NodeInstanceRole** for the node group that was created. You need this when you configure your Amazon EKS worker nodes in step 10.
+2. Record the value of **NodeInstanceRole** for the node group that was created. You need this when you configure your Amazon EKS worker nodes in step 11.
 
-### **Step 10.** Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
+### **Step 11.** Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
 1. Download the configuration map
 `wget https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-auth-cm-arm64.yaml`
 
-2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile)>_ snippet with the **NodeInstanceRole** values that you recorded from step 9 above, and save the file.
+2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile) of arm64 nodes (see step 10)>_ snippet with the **NodeInstanceRole** values that you recorded from step 10 above, and save the file.
 
 **Important**: Do not modify any other lines in this file.
 
@@ -207,7 +209,7 @@ metadata:
   namespace: kube-system
 data:  
   mapRoles: |  
-    - rolearn: <ARN of instance role (not instance profile) of the nodes from step 9>
+    - rolearn: <ARN of instance role (not instance profile) of arm64 nodes (see step 10)>
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
@@ -222,7 +224,7 @@ If you receive any other authorization or resource type errors, see [Unauthorize
 
 4. Watch the status of your nodes and wait for them to reach the **Ready** status: `kubectl get nodes --watch`
 
-### **Step 11.** Launch an app
+### **Step 12.** Launch an app
 Launch the demo Guest Book application from the [EKS Getting Started Guide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 1. Create the Redis master replication controller.
