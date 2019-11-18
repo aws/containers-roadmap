@@ -165,8 +165,8 @@ kubectl -n kube-system edit deployment coredns
 2. Choose **Create stack**.
 3. For **Choose a template**, select **Specify an Amazon S3 template URL**.
 4. Paste the following URL into the text area and choose **Next**
-`https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/amazon-eks-arm-nodegroup.yaml`
-5. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
+`https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-11-15/amazon-eks-arm-nodegroup.yaml`
+1. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
   * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it <cluster-name>-worker-nodes.
   * **ClusterName**: Enter the name that you used when you created your Amazon EKS cluster.
     **Important**
