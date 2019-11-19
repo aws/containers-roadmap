@@ -24,27 +24,25 @@ Using the instructions and assets in this repository folder is governed as a pre
 * If you haven't used Amazon EKS before, familiarize yourself with the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). We also have a [tutorial](https://eksworkshop.com) that is a good starting point for new users.
 
 **Important Considerations for ARM nodes**
-* EKS currently supports running A1 instances with Kubernetes version 1.12 only
+* EKS currently supports the ability to run all nodes on A1 instances with Kubernetes version 1.13 and 1.14.
 * The preview is only available in us-west-2. You must create your EKS cluster in this region.
-* VPC resource controller and coredns will be running in x86_64 node
 
 ## Key Resources
 The specific resources you need to run containers on EC2 A1 instances with Amazon EKS are within this repository folder. All other resources needed to successfully start and manage an EKS cluster can be found within the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html).
 
 ### Latest EKS A1 AMIs
 
-**Kubernetes 1.12**
-
-|  Region         | EKS Optimized AMI ID  |                                        
-| --------------- | --------------------  |
-| us-west-2    	  | ami-08e10400108cec7e7 |
+|  Region         | Kubernetes Version    | EKS Optimized AMI ID  |                                        
+| --------------- | --------------------- | --------------------- |
+| us-west-2    	  | 1.13                  | ami-05546e5b2e87ae067 |
+| us-west-2       | 1.14                  | ami-07d9ce1e5c7cfb536 |
 
 ## Instructions
 Follow these instructions to create a Kubernetes cluster with Amazon EKS and start a service on EC2 A1 nodes.
 
 **Note**: This guide requires that you create a new EKS cluster. Please ensure you complete all steps to avoid issues.
 
-### Step 1. Install eksctl, the EKS command line tool
+### **Step 1.** Install eksctl, the EKS command line tool
 To create our cluster, we will use [eksctl](https://eksctl.io/), the command line tool for EKS.
 
 1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed.
@@ -53,75 +51,153 @@ If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby 
 3. Install ekstctl: `brew install weaveworks/tap/eksctl`
 4. Test that your installation was successful: `eksctl --help`
 
-### Step 2. Install kubectl and AWS IAM authenticator
+### **Step 2.** Install kubectl and AWS IAM authenticator
 If you used the Homebrew instructions above to install eksctl on macOS, then kubectl and the aws-iam-authenticator have already been installed on your system. Otherwise, you can refer to the Amazon EKS [getting started guide prerequisites](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#eks-prereqs).
 
-### Step 3. Create Your VPC, IAM role, and Amazon EKS Cluster with a single linux worker node
-Create an EKS cluster with a single linux worker node using the following eksctl command:
+### **Step 3.** Create Your VPC, IAM role, and Amazon EKS Cluster without worker nodes
+Create an EKS cluster without provisioning worker nodes using the following eksctl command, choosing the version of Kubernetes you would like to use:
 
 ```
 eksctl create cluster \
 --name a1-preview \
---version 1.12 \
---region <eu-west-1, us-east-1, us-east-2, us-west-2> \
---nodegroup-name standard-workers \
---node-type t3.medium \
---nodes 1 \
---nodes-min 1 \
---nodes-max 1 \
---node-ami auto
+--version << Choose 1.13 or 1.14 >> \
+--region us-west-2 \
+--without-nodegroup
 ```
 
-This process typically takes 10-15 minutes. You can monitor the progress in the [EKS console](https://console.aws.amazon.com/eks).
+Launching an EKS cluster using eksctl creates a CloudFormation stack. The launch process for this stack typically takes 10-15 minutes. You can monitor the progress in the [EKS console](https://console.aws.amazon.com/eks).
 
-Test that your cluster is running using `kubectl get svc`.
+Once the launch process has completed, we will want to review the CloudFormation stack to record the IDs of the Control Plane security group as well as the VPC ID. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation). You will see a stack named `eksctl-<cluster name>-cluster`. Select this stack, and on the right-hand side panel, click the tab for `Outputs`. Record the values of the items for `SecurityGroup` and `VPC`.
 
-### Step 4. Record the x86 instance profile ARN
-1. After the x86 worker node stack has finished creating, select it in the console and choose the **Outputs** tab.
-2. Record the value of **InstanceRoleARN** for the node group that was created. You need this when you configure your Amazon EKS worker nodes in step 8.
+Test that your cluster is running using `kubectl get svc`. It should return information such as the following:
 
-### Step 5. Deploy ARM CNI Plugin
-1. Check that your Linux worker node joined the cluster: `kubectl get nodes`
-2. Deploy the vpc-resource-controller: `kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-k8s-cni-arm64.yaml`
+```
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   ww.xx.yy.zz      <none>        443/TCP   24h
+```
 
-### Step 6. Launch and Configure Amazon EKS ARM Worker Nodes
+In order to support having only A1 nodes on our EKS cluster, we need to update some of the Kubernetes components. Follow the steps below to update CoreDNS, Kube-Proxy, and install the AWS ARM64 CNI plugin.
+
+### **Step 4.** Update the image ID used for CoreDNS
+Run one of the below commands based upon the version of Kubernetes you are using to install an updated version of CoreDNS:
+
+**Kubernetes 1.13**
+```shell
+kubectl set image --namespace kube-system deployment.apps/coredns \
+coredns=940911992744.dkr.ecr.us-west-2.amazonaws.com/eks/coredns-arm64:v1.2.6
+```
+
+**Kubernetes 1.14**
+```shell
+kubectl set image --namespace kube-system deployment.apps/coredns \
+coredns=940911992744.dkr.ecr.us-west-2.amazonaws.com/eks/coredns-arm64:v1.3.1
+```
+
+### **Step 5.** Update the image ID used for Kube-Proxy
+Run the below command based upon the version of Kubernetes you are using to install an updated version of Kube-Proxy:
+
+**Kubernetes 1.13**
+```shell
+kubectl set image daemonset.apps/kube-proxy \
+-n kube-system \
+kube-proxy=940911992744.dkr.ecr.us-west-2.amazonaws.com/eks/kube-proxy-arm64:v1.13.10
+```
+
+**Kubernetes 1.14**
+```shell
+kubectl set image daemonset.apps/kube-proxy \
+-n kube-system \
+kube-proxy=940911992744.dkr.ecr.us-west-2.amazonaws.com/eks/kube-proxy-arm64:v1.14.7
+```
+
+### *Step 6.* Deploy the ARM CNI Plugin
+Deploy the vpc-resource-controller: kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-k8s-cni-arm64.yaml
+
+### **Step 7.** Patch the aws-node DaemonSet to use the ARM CNI plugin
+Run the below command to install the AWS ARM64 CNI Plugin (this command will work for both 1.13 as well as 1.14):
+```shell
+kubectl patch daemonset aws-node \
+-n kube-system \
+-p '{"spec": {"template": {"spec": {"containers": [{"image": "940911992744.dkr.ecr.us-west-2.amazonaws.com/amazon-k8s-cni-arm64:v1.5.3","name":"aws-node"}]}}}}'
+```
+
+### **Step 8.** Update the node affinity of Kube-Proxy, AWS-Node, and CoreDNS
+Before we launch our A1 instances, we will need to udpate the node affinity for the Kube-Proxy, AWS-Node, and CoreDNS. After running each of the commands below, an editor will open (e.g.: vi for Linux or MacOS clients, notepad for Windows clients). Once the editor has opened, scroll down to the bottom of the file to where the node affinity is defined. In each case, update the value of `amd64` to `arm64` (see example below):
+
+**Example: Updating the affinity for kube-proxy**
+```
+...
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: kube-proxy
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: kube-proxy
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/os
+                operator: In
+                values:
+                - linux
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - amd64 <-- change to arm64
+...
+```
+
+```shell
+kubectl -n kube-system edit ds kube-proxy
+kubectl -n kube-system edit ds aws-node
+kubectl -n kube-system edit deployment coredns
+```
+
+### *Step 9.* Launch and Configure Amazon EKS ARM Worker Nodes
 1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation. Ensure that you are in the AWS region that you created your EKS cluster in.
 2. Choose **Create stack**.
 3. For **Choose a template**, select **Specify an Amazon S3 template URL**.
 4. Paste the following URL into the text area and choose **Next**
-`https://s3-us-west-2.amazonaws.com/amazon-eks-arm-beta/templates/latest/amazon-eks-arm-nodegroup.yaml`
-5. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
+`https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-11-15/amazon-eks-arm-nodegroup.yaml`
+1. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
   * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it <cluster-name>-worker-nodes.
   * **ClusterName**: Enter the name that you used when you created your Amazon EKS cluster.
     **Important**
     This name must exactly match the name you used in Step 1: Create Your Amazon EKS Cluster; otherwise, your worker nodes cannot join the cluster.
-  * **ClusterControlPlaneSecurityGroup**: Choose the SecurityGroups value from the AWS CloudFormation output that you generated with Create your Amazon EKS Cluster VPC.
+  * **ClusterControlPlaneSecurityGroup**: You will be presented with a drop-down list of security groups. Choose the value from the AWS CloudFormation output that you captured in the Create your Amazon EKS Cluster VPC step. (e.g. eksctl-<cluster name>-cluster-ControlPlaneSecurityGroup-XXXXXXXXXXXXX)
   * **NodeGroupName**: Enter a name for your node group. This name can be used later to identify the Auto Scaling node group that is created for your worker nodes.
   * **NodeAutoScalingGroupMinSize**: Enter the minimum number of nodes that your worker node Auto Scaling group can scale in to.
   * **NodeAutoScalingGroupDesiredCapacity**: Enter the desired number of nodes to scale to when your stack is created.
   * **NodeAutoScalingGroupMaxSize**: Enter the maximum number of nodes that your worker node Auto Scaling group can scale out to.
-  * **NodeInstanceType**: Choose an instance type for your worker nodes.
+  * **NodeInstanceType**: Choose one of the A1 instance types for your worker nodes (e.g.: a1-large).
   * **NodeImageId**: Enter the current Amazon EKS worker node AMI ID for your region from the [AMI table](#latest-eks-a1-amis).
   * **BootstrapArguments**: --pause-container-account 940911992744
   * **KeyName**: Enter the name of an Amazon EC2 key pair that you can use to decrypt administrator password while RDP into your worker nodes after they launch. If you don't already have an Amazon EC2 keypair, you can create one in the AWS Management Console. For more information, see Amazon EC2 Key Pairs in the Amazon EC2 User Guide for Linux Instances.
 
-  **Note**: If you do not provide a keypair here, the AWS CloudFormation stack creation fails.
+  **Note**: If you do not provide a keypair here, the AWS CloudFormation stack creation will fail.
 
-  * **VpcId**: Enter the ID for the VPC that you created in Create your Amazon EKS Cluster VPC.
+  * **VpcId**: Choose the value from the AWS CloudFormation output that you captured in the Create your Amazon EKS Cluster VPC step. (e.g. eksctl-<cluster name>-cluster/VPC)
   * **Subnets**: Choose the subnets that you created in Create your Amazon EKS Cluster VPC.
   
 6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
 7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
 
-### Step 7. Record the ARM64 instance role ARN.
+### **Step 10.** Record the ARM64 instance role ARN.
 1. After the ARM worker nodes stack has finished creating, select it in the console and choose the **Outputs** tab.
-2. Record the value of **NodeInstanceRole** for the node group that was created. You need this when you configure your Amazon EKS worker nodes in step 8.
+2. Record the value of **NodeInstanceRole** for the node group that was created. You need this when you configure your Amazon EKS worker nodes in step 11.
 
-### Step 8. Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
+### **Step 11.** Configure the AWS authenticator configuration map to enable worker nodes to join your cluster
 1. Download the configuration map
 `wget https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-ec2-a1-preview/aws-auth-cm-arm64.yaml`
 
-2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile)>_ snippets with the **NodeInstanceRole** values that you recorded from steps 3 and 5 in the previous procedure, and save the file.
+2. Open the file with your favorite text editor. Replace the _<ARN of instance role (not instance profile) of arm64 nodes (see step 10)>_ snippet with the **NodeInstanceRole** values that you recorded from step 10 above, and save the file.
 
 **Important**: Do not modify any other lines in this file.
 
@@ -133,12 +209,7 @@ metadata:
   namespace: kube-system
 data:  
   mapRoles: |  
-    - rolearn: <ARN of instance role (not instance profile) of **x86** node from step 4> 
-      username: system:node:{{EC2PrivateDNSName}} 
-      groups: 
-        - system:bootstrappers 
-        - system:nodes 
-    - rolearn: <ARN of instance role (not instance profile) of **ARM64** nodes from step 7>
+    - rolearn: <ARN of instance role (not instance profile) of arm64 nodes (see step 10)>
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
@@ -153,7 +224,7 @@ If you receive any other authorization or resource type errors, see [Unauthorize
 
 4. Watch the status of your nodes and wait for them to reach the **Ready** status: `kubectl get nodes --watch`
 
-### Step 7. Launch an app
+### **Step 12.** Launch an app
 Launch the demo Guest Book application from the [EKS Getting Started Guide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 1. Create the Redis master replication controller.
