@@ -23,6 +23,7 @@ Parameters:
       - a1.xlarge
       - a1.2xlarge
       - a1.4xlarge
+      - a1.metal
 
   NodeAutoScalingGroupMinSize:
     Description: Minimum size of Node Group ASG.
@@ -51,7 +52,6 @@ Parameters:
   BootstrapArguments:
     Description: Arguments to pass to the bootstrap script. See files/bootstrap.sh in https://github.com/awslabs/amazon-eks-ami
     Type: String
-    Default: "--pause-container-account 940911992744"
 
   NodeGroupName:
     Description: Unique identifier for the Node Group.
