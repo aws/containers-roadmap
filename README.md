@@ -21,7 +21,7 @@ We now have information for developer preview programs within this repository. I
 * [Firelens](/preview-programs/firelens)
 
 **Past Programs**
-* [EKS Windows](preview-programs/eks-windows-preview) - Launched! https://github.com/aws/containers-roadmap/issues/69
+* [EKS Windows](preview-programs/eks-windows-preview) - *[Support for Windows on EKS is generally available](https://github.com/aws/containers-roadmap/issues/69)*
 
 
 ## Security disclosures
