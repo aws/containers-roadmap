@@ -8,11 +8,21 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 
 [See the roadmap »](https://github.com/aws/containers-roadmap/projects/1)
 
+**Other AWS Public Roadmaps**
+* [AWS App Mesh](https://github.com/aws/aws-app-mesh-roadmap)
+* [CloudFormation coverage](https://github.com/aws-cloudformation/aws-cloudformation-coverage-roadmap)
+
 ## Developer Preview Programs
-We now have information for developer preview programs within this repository.
-* Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
-* Participate in the EKS Windows preview [here](/preview-programs/eks-windows-preview).
-* Participate in the EC2 A1 Instances preview [here](/preview-programs/eks-ec2-a1-preview).
+We now have information for developer preview programs within this repository. Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
+
+**Current Programs**
+* [EC2 A1 Instances](/preview-programs/eks-ec2-a1-preview)
+* [ECS Multiple Target Groups](/master/preview-programs/ecs-multipletg-service)
+* [Firelens](/preview-programs/firelens)
+
+**Past Programs**
+* EKS Windows - *[Support for Windows on EKS is generally available](https://github.com/aws/containers-roadmap/issues/69)*
+
 
 ## Security disclosures
 
