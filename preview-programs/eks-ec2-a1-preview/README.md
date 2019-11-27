@@ -163,8 +163,12 @@ region that you created your EKS cluster in.
 3. For **Choose a template**, select **Specify an Amazon S3 template URL**.
 4. Paste the following URL into the text area and choose **Next**
 `https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-11-15/amazon-eks-arm-nodegroup.yaml`
+
 1. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
   * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it <cluster-name>-worker-nodes.
+  * **KubernetesVersion** Select the version of Kubernetes you chose when launching your EKS cluster.
+    **Important**
+    This version must match the version you used in Step 1: Create Your Amazon EKS Cluster; otherwise, your worker nodes cannot join the cluster.
   * **ClusterName**: Enter the name that you used when you created your Amazon EKS cluster.
     **Important**
     This name must exactly match the name you used in Step 1: Create Your Amazon EKS Cluster; otherwise, your worker nodes cannot join the cluster.
@@ -187,8 +191,12 @@ region that you created your EKS cluster in.
   Cluster VPC step. (e.g. eksctl-\<cluster name\>-cluster/VPC)
   * **Subnets**: Choose the subnets that you created in Create your Amazon EKS Cluster VPC.
   
-6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
-7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
+  * **NodeImageAMI113**: The Amazon EC2 Systems Manager parameter for the 1.13 AMI image ID. You should not make any changes to this parameter; this value is ignored if you selected 1.14 for KubernetesVersion.
+
+  * **NodeImageAMI114**: The Amazon EC2 Systems Manager parameter for the 1.14 AMI image ID. You should not make any changes to this parameter; this value is ignored if you selected 1.13 for KubernetesVersion.
+
+2. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
+3. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
 
 ### **Step 9.** Record the ARM64 instance role ARN.
 1. After the ARM worker nodes stack has finished creating, select it in the console and choose the **Outputs** tab.
