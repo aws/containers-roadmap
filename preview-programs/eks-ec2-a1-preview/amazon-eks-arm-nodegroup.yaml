@@ -8,14 +8,17 @@ Parameters:
     Description: The EC2 Key Pair to allow SSH access to the instances
     Type: AWS::EC2::KeyPair::KeyName
 
-  NodeImageId:
-    Description: AMI id for the node instances.
-    Type: AWS::EC2::Image::Id
+  KubernetesVersion:
+    Type: String
+    Default: '1.14'
+    AllowedValues:
+      - '1.13'
+      - '1.14'
 
   NodeInstanceType:
     Description: EC2 instance type for the node instances
     Type: String
-    Default: a1.medium
+    Default: a1.large
     ConstraintDescription: Must be a valid EC2 instance type
     AllowedValues:
       - a1.medium
@@ -23,7 +26,6 @@ Parameters:
       - a1.xlarge
       - a1.2xlarge
       - a1.4xlarge
-      - a1.metal
 
   NodeAutoScalingGroupMinSize:
     Description: Minimum size of Node Group ASG.
@@ -52,6 +54,7 @@ Parameters:
   BootstrapArguments:
     Description: Arguments to pass to the bootstrap script. See files/bootstrap.sh in https://github.com/awslabs/amazon-eks-ami
     Type: String
+    Default: "--pause-container-account 602401143452"
 
   NodeGroupName:
     Description: Unique identifier for the Node Group.
@@ -69,6 +72,17 @@ Parameters:
     Description: The subnets where workers can be created.
     Type: List<AWS::EC2::Subnet::Id>
 
+  NodeImageAMI113:
+    Description: The SSM parameter that contains the Amazon Machine Image (AMI) ID for Kubernetes 1.13 nodes.
+    Type : 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: /aws/service/eks/optimized-ami/1.13/amazon-linux-2-arm64/recommended/image_id
+
+  NodeImageAMI114:
+    Description: The SSM parameter that contains the Amazon Machine Image (AMI) ID for Kubernetes 1.14 nodes.
+    Type : 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: /aws/service/eks/optimized-ami/1.14/amazon-linux-2-arm64/recommended/image_id
+
+
 Metadata:
 
   AWS::CloudFormation::Interface:
@@ -76,6 +90,7 @@ Metadata:
       - Label:
           default: EKS Cluster
         Parameters:
+          - KubernetesVersion
           - ClusterName
           - ClusterControlPlaneSecurityGroup
       - Label:
@@ -86,7 +101,7 @@ Metadata:
           - NodeAutoScalingGroupDesiredCapacity
           - NodeAutoScalingGroupMaxSize
           - NodeInstanceType
-          - NodeImageId
+          - NodeImageAMI
           - NodeVolumeSize
           - KeyName
           - BootstrapArguments
@@ -95,6 +110,15 @@ Metadata:
         Parameters:
           - VpcId
           - Subnets
+      - Label:
+          default: Amazon Machine Image information
+        Parameters:
+          - NodeImageAMI113
+          - NodeImageAMI114
+
+Conditions:
+  Kubernetes113: !Equals [!Ref KubernetesVersion, '1.13']
+  Kubernetes114: !Equals [!Ref KubernetesVersion, '1.14']
 
 Resources:
 
@@ -222,7 +246,11 @@ Resources:
     Properties:
       AssociatePublicIpAddress: true
       IamInstanceProfile: !Ref NodeInstanceProfile
-      ImageId: !Ref NodeImageId
+      ImageId:
+        Fn::Join:
+          - ''
+          - - !If [ Kubernetes114, !Ref NodeImageAMI114, '' ]
+            - !If [ Kubernetes113, !Ref NodeImageAMI113, '' ]
       InstanceType: !Ref NodeInstanceType
       KeyName: !Ref KeyName
       SecurityGroups:

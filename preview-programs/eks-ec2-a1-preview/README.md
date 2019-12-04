@@ -179,7 +179,6 @@ region that you created your EKS cluster in.
   * **NodeAutoScalingGroupDesiredCapacity**: Enter the desired number of nodes to scale to when your stack is created.
   * **NodeAutoScalingGroupMaxSize**: Enter the maximum number of nodes that your worker node Auto Scaling group can scale out to.
   * **NodeInstanceType**: Choose one of the A1 instance types for your worker nodes (e.g.: `a1.large`).
-  * **NodeImageId**: Enter the current Amazon EKS worker node AMI ID for your region from the [AMI table](#latest-eks-a1-amis).
   * **NodeVolumeSize**: Enter node volume size. The default of 20 is fine.
   * **KeyName**: Enter the name of an Amazon EC2 key pair that you can use to decrypt administrator password while RDP into your 
   worker nodes after they launch. If you don't already have an Amazon EC2 key pair, you can create one in the AWS Management Console. 
