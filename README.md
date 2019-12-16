@@ -18,11 +18,10 @@ We now have information for developer preview programs within this repository. I
 **Current Programs**
 * [EC2 A1 Instances](/preview-programs/eks-ec2-a1-preview)
 * [ECS Multiple Target Groups](/master/preview-programs/ecs-multipletg-service)
-* [Firelens](/preview-programs/firelens)
 
 **Past Programs**
-* EKS Windows - *[Support for Windows on EKS is generally available](https://github.com/aws/containers-roadmap/issues/69)*
-
+* Firelens - *[Support for custom log routing is generally available](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)*
+* EKS Windows - *[Support for Windows on EKS is generally available](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)*
 
 ## Security disclosures
 
