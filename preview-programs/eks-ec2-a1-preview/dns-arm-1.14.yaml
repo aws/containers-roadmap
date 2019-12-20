@@ -57,7 +57,7 @@ spec:
         operator: "Exists"
       containers:
       - name: coredns
-        image: 602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/coredns-arm64:v1.2.6
+        image: 602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/coredns-arm64:v1.6.6
         imagePullPolicy: IfNotPresent
         resources:
           limits:
@@ -105,4 +105,3 @@ spec:
             items:
             - key: Corefile
               path: Corefile
-              
