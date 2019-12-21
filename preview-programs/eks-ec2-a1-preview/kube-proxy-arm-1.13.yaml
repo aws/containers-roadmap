@@ -39,7 +39,7 @@ spec:
       priorityClassName: system-node-critical
       containers:
       - name: kube-proxy
-        image: 602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/kube-proxy-arm64:v1.13.10
+        image: 602401143452.dkr.ecr.us-west-2.amazonaws.com/eks/kube-proxy-arm64:v1.13.12
         resources:
           requests:
             cpu: 100m
