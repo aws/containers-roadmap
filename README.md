@@ -17,7 +17,7 @@ We now have information for developer preview programs within this repository. I
 
 **Current Programs**
 * [EC2 A1 Instances](/preview-programs/eks-ec2-a1-preview)
-* [ECS Multiple Target Groups](/master/preview-programs/ecs-multipletg-service)
+* [ECS Multiple Target Groups](/preview-programs/ecs-multipletg-service)
 
 **Past Programs**
 * Firelens - *[Support for custom log routing is generally available](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)*
