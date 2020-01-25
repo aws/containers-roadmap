@@ -11,6 +11,7 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 **Other AWS Public Roadmaps**
 * [AWS App Mesh](https://github.com/aws/aws-app-mesh-roadmap)
 * [CloudFormation coverage](https://github.com/aws-cloudformation/aws-cloudformation-coverage-roadmap)
+* [AWS Elastic Beanstalk](https://github.com/aws/elastic-beanstalk-roadmap)
 
 ## Developer Preview Programs
 We now have information for developer preview programs within this repository. Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
