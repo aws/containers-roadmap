@@ -1,6 +1,6 @@
 # Amazon EKS ARM Instances Preview Program
 
-Start here to participate in the [Amazon EKS](https://aws.amazon.com/eks) preview program for EC2 ARM instances] Using the instructions and code in this repository you can run containers using EC2 [A1](https://aws.amazon.com/ec2/instance-types/a1) or [M6](https://aws.amazon.com/ec2/instance-types/m6/) instances as part of a Kubernetes cluster that is managed by Amazon EKS.
+Start here to participate in the [Amazon EKS](https://aws.amazon.com/eks) preview program for EC2 ARM instances. Using the instructions and code in this repository you can run containers using EC2 [A1](https://aws.amazon.com/ec2/instance-types/a1) or [M6](https://aws.amazon.com/ec2/instance-types/m6/) instances as part of a Kubernetes cluster that is managed by Amazon EKS.
 
 EC2 ARM instances deliver significant cost savings for scale-out and Arm-based applications such as web servers, containerized microservices, caching fleets, and distributed data stores.
 
