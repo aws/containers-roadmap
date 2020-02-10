@@ -5,8 +5,8 @@ Start here to participate in the [Amazon EKS](https://aws.amazon.com/eks) previe
 EC2 ARM instances deliver significant cost savings for scale-out and Arm-based applications such as web servers, containerized microservices, caching fleets, and distributed data stores.
 
 ### Supported Instance Types
-* [A1](https://aws.amazon.com/ec2/instance-types/a1/) instances deliver significant cost savings for scale-out and Arm-based applications. These are the first EC2 instances powered by AWS Graviton Processors that feature 64-bit Arm Neoverse cores and custom silicon designed by AWS.
-* [M6g](https://aws.amazon.com/ec2/instance-types/m6/) instances (_currently in preview_) are powered by Arm-based AWS Graviton2 processors. They deliver up to 40% better price performance over current generation M5 instances and offer a balance of compute, memory, and networking resources for a broad set of workloads.
+* [A1 instances](https://aws.amazon.com/ec2/instance-types/a1/) deliver significant cost savings for scale-out and Arm-based applications. These are the first EC2 instances powered by AWS Graviton Processors that feature 64-bit Arm Neoverse cores and custom silicon designed by AWS.
+* [M6g instances](https://aws.amazon.com/ec2/instance-types/m6/) (_currently in preview_) are powered by Arm-based AWS Graviton2 processors. They deliver up to 40% better price performance over current generation M5 instances and offer a balance of compute, memory, and networking resources for a broad set of workloads.
 
 **Note:** The assets and instructions in this repository folder are offered as part of a _public preview_ program administered by AWS.
 
@@ -19,7 +19,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 
 #### Leaving feedback and getting help
 * The assets and instructions in this repository are offered on an _as-is_ basis as part of a public preview program for new AWS service functionality.
-* Leave comments or questions on our [GitHub roadmap](https://github.com/aws/containers-roadmap/issues/).
+* Please open [an issue](https://github.com/aws/containers-roadmap/issues/new?assignees=&labels=Developer+Preview%2C+EKS+ARM&template=eks-arm-preview-feedback.md&title=%5BEKS+ARM%5D+Issue) with comments, questions, or to report a bug.
 * For issues with the Amazon EKS service (creating, modifying, deleting a cluster) or with your AWS account, please contact AWS support using the AWS console.
 
 ## Before you begin
