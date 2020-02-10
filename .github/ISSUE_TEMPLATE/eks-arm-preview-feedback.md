@@ -2,12 +2,12 @@
 name: EKS ARM Preview Feedback
 about: Help us improve the EKS ARM Preview Program
 title: "[EKS ARM] Issue"
-labels: ''
+labels: Developer Preview, EKS ARM
 assignees: ''
 
 ---
 
-Please let us know how we can improve the EKS ARM preview program. This can be a bug report, feature, or functionality request.
+Please let us know how we can improve the [EKS ARM preview program](https://github.com/aws/containers-roadmap/tree/master/preview-programs/eks-arm-preview). This can be a bug report, feature, or functionality request.
 
 **Describe the issue**
 A clear and concise description
