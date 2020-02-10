@@ -21,6 +21,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 * The assets and instructions in this repository are offered on an _as-is_ basis as part of a public preview program for new AWS service functionality.
 * Please [open an issue](https://github.com/aws/containers-roadmap/issues/new?assignees=&labels=Developer+Preview%2C+EKS+ARM&template=eks-arm-preview-feedback.md&title=%5BEKS+ARM%5D+Issue) for comments, questions, or to report a bug.
 * For issues with the Amazon EKS service (creating, modifying, deleting a cluster) or with your AWS account, please contact AWS support using the AWS console.
+* As always, if you think you’ve found a potential security issue, please do not post it in the Issues.  Instead, please follow the instructions [here](https://aws.amazon.com/security/vulnerability-reporting/) or [email AWS security directly](mailto:aws-security@amazon.com).
 
 ## Before you begin
 * Make sure you have an active and valid AWS account. If you don't, you can create one [here](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html).
