@@ -32,7 +32,6 @@ The specific resources you need to run containers on EC2 ARM instances with Amaz
 
 #### Important Considerations
 * EKS currently supports the ability to run all nodes on ARM instances with Kubernetes version 1.13 and 1.14.
-* The preview is only available in us-west-2. You must create your EKS cluster in this region.
 * If you plan to use **M6g instances**, ensure you have access to the M6g preview. Visit https://pages.awscloud.com/m6gpreview.html to request access. **A1 instances** are generally available for all AWS customers.
 
 ## Instructions
