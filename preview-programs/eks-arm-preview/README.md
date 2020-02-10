@@ -27,20 +27,13 @@ Using the instructions and assets in this repository folder is governed as a pre
 * If you haven't used Kubernetes before, familiarize yourself with the [basics of Kubernetes](https://kubernetes.io/docs/concepts/)
 * If you haven't used Amazon EKS before, familiarize yourself with the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). We also have a [tutorial](https://eksworkshop.com) that is a good starting point for new users.
 
-**Important Considerations for ARM instances**
+#### Key Resources
+The specific resources you need to run containers on EC2 ARM instances with Amazon EKS are within this repository folder. All other resources needed to successfully start and manage an EKS cluster can be found within the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html).
+
+#### Important Considerations
 * EKS currently supports the ability to run all nodes on ARM instances with Kubernetes version 1.13 and 1.14.
 * The preview is only available in us-west-2. You must create your EKS cluster in this region.
 * If you plan to use **M6g instances**, ensure you have access to the M6g preview. Visit https://pages.awscloud.com/m6gpreview.html to request access. **A1 instances** are generally available for all AWS customers.
-
-## Key Resources
-The specific resources you need to run containers on EC2 ARM instances with Amazon EKS are within this repository folder. All other resources needed to successfully start and manage an EKS cluster can be found within the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html).
-
-### EKS-optimized ARM AMIs
-
-|  Region         | Kubernetes Version    | EKS Optimized AMI ID  |                                        
-| --------------- | --------------------- | --------------------- |
-| us-west-2    	  | 1.13                  | ami-004a838b8dd73e3d4 |
-| us-west-2       | 1.14                  | ami-0f1e49dadf307aa92 |
 
 ## Instructions
 Follow these instructions to create a Kubernetes cluster with Amazon EKS and start a service on EC2 ARM nodes.
