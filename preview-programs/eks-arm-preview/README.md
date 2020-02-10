@@ -35,7 +35,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 ## Key Resources
 The specific resources you need to run containers on EC2 ARM instances with Amazon EKS are within this repository folder. All other resources needed to successfully start and manage an EKS cluster can be found within the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html).
 
-### Latest EKS ARM AMIs
+### EKS-optimized ARM AMIs
 
 |  Region         | Kubernetes Version    | EKS Optimized AMI ID  |                                        
 | --------------- | --------------------- | --------------------- |
@@ -122,11 +122,9 @@ kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master
 region that you created your EKS cluster in.
 2. Choose **Create stack**.
 3. For **Choose a template**, select **Specify an Amazon S3 template URL**.
-4. Paste one of the following URLs into the text area and choose **Next**
-  1. For A1 instances: `https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-11-15/amazon-eks-arm-nodegroup.yaml`
-  2. For M6g instances: `<SRINI FILL ME IN!>`
-
-1. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
+4. Paste the following URL into the text area and choose **Next**
+`https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-11-15/amazon-eks-arm-nodegroup.yaml`
+5. On the Specify Details page, fill out the following parameters accordingly, and choose **Next**.
   * **Stack name**: Choose a stack name for your AWS CloudFormation stack. For example, you can call it <cluster-name>-worker-nodes.
   * **KubernetesVersion** Select the version of Kubernetes you chose when launching your EKS cluster.
     **Important**
@@ -156,8 +154,8 @@ region that you created your EKS cluster in.
 
   * **NodeImageAMI114**: The Amazon EC2 Systems Manager parameter for the 1.14 AMI image ID. You should not make any changes to this parameter; this value is ignored if you selected 1.13 for KubernetesVersion.
 
-2. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
-3. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
+6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
+7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
 
 ### **Step 8.** Record the ARM64 instance role ARN.
 1. After the ARM worker nodes stack has finished creating, select it in the console and choose the **Outputs** tab.
