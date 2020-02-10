@@ -6,7 +6,7 @@ EC2 ARM instances deliver significant cost savings for scale-out and Arm-based a
 
 ### Supported Instance Types
 * [A1](https://aws.amazon.com/ec2/instance-types/a1/) instances deliver significant cost savings for scale-out and Arm-based applications. These are the first EC2 instances powered by AWS Graviton Processors that feature 64-bit Arm Neoverse cores and custom silicon designed by AWS.
-* [M6g](https://aws.amazon.com/ec2/instance-types/m6/) are powered by Arm-based AWS Graviton2 processors. They deliver up to 40% better price performance over current generation M5 instances and offer a balance of compute, memory, and networking resources for a broad set of workloads. _Currently in preview_
+* [M6g](https://aws.amazon.com/ec2/instance-types/m6/) instances (_currently in preview_) are powered by Arm-based AWS Graviton2 processors. They deliver up to 40% better price performance over current generation M5 instances and offer a balance of compute, memory, and networking resources for a broad set of workloads.
 
 **Note:** The assets and instructions in this repository folder are offered as part of a _public preview_ program administered by AWS.
 
@@ -109,14 +109,14 @@ kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master
 kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/kube-proxy-arm-1.14.yaml
 ```
 
-### *Step 6.* Deploy the ARM CNI Plugin
+### **Step 6.** Deploy the ARM CNI Plugin
 Run the below command to install the AWS ARM64 CNI Plugin (this command will work for both 1.13 as well as 1.14):
 
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/aws-k8s-cni-arm64.yaml
 ```
 
-### *Step 7.* Launch and Configure Amazon EKS ARM Worker Nodes
+### **Step 7.** Launch and Configure Amazon EKS ARM Worker Nodes
 0. (OPTIONAL) If you plan to use **M6g instances**, ensure you have access to the M6g preview. Visit https://pages.awscloud.com/m6gpreview.html to request access.
 1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation. Ensure that you are in the AWS
 region that you created your EKS cluster in.
