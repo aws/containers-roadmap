@@ -10,10 +10,11 @@ Parameters:
 
   KubernetesVersion:
     Type: String
-    Default: '1.14'
+    Default: '1.15'
     AllowedValues:
       - '1.13'
       - '1.14'
+      - '1.15'
 
   NodeInstanceType:
     Description: EC2 instance type for the node instances
@@ -26,6 +27,14 @@ Parameters:
       - a1.xlarge
       - a1.2xlarge
       - a1.4xlarge
+      - m6g.medium
+      - m6g.large
+      - m6g.xlarge
+      - m6g.2xlarge
+      - m6g.4xlarge
+      - m6g.8xlarge
+      - m6g.12xlarge
+      - m6g.16xlarge
 
   NodeAutoScalingGroupMinSize:
     Description: Minimum size of Node Group ASG.
@@ -82,6 +91,17 @@ Parameters:
     Type : 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
     Default: /aws/service/eks/optimized-ami/1.14/amazon-linux-2-arm64/recommended/image_id
 
+  NodeImageAMI115:
+    Description: The SSM parameter that contains the Amazon Machine Image (AMI) ID for Kubernetes 1.15 nodes.
+    Type : 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: /aws/service/eks/optimized-ami/1.15/amazon-linux-2-arm64/recommended/image_id
+
+Mappings:
+  PartitionMap:
+    aws:
+      EC2ServicePrincipal: "ec2.amazonaws.com"
+    aws-cn:
+      EC2ServicePrincipal: "ec2.amazonaws.com.cn"
 
 Metadata:
 
@@ -115,10 +135,12 @@ Metadata:
         Parameters:
           - NodeImageAMI113
           - NodeImageAMI114
+          - NodeImageAMI115
 
 Conditions:
   Kubernetes113: !Equals [!Ref KubernetesVersion, '1.13']
   Kubernetes114: !Equals [!Ref KubernetesVersion, '1.14']
+  Kubernetes115: !Equals [!Ref KubernetesVersion, '1.15']
 
 Resources:
 
@@ -137,13 +159,14 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              Service: ec2.amazonaws.com
+              Service:
+                - !FindInMap [PartitionMap, !Ref "AWS::Partition", EC2ServicePrincipal]
             Action: sts:AssumeRole
       Path: "/"
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 
   NodeSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -244,13 +267,13 @@ Resources:
   NodeLaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
-      AssociatePublicIpAddress: true
       IamInstanceProfile: !Ref NodeInstanceProfile
       ImageId:
         Fn::Join:
           - ''
           - - !If [ Kubernetes114, !Ref NodeImageAMI114, '' ]
             - !If [ Kubernetes113, !Ref NodeImageAMI113, '' ]
+            - !If [ Kubernetes115, !Ref NodeImageAMI115, '' ]
       InstanceType: !Ref NodeInstanceType
       KeyName: !Ref KeyName
       SecurityGroups:
