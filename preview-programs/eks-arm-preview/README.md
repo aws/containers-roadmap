@@ -6,7 +6,7 @@ EC2 ARM instances deliver significant cost savings for scale-out and Arm-based a
 
 ### Supported Instance Types
 * [A1 instances](https://aws.amazon.com/ec2/instance-types/a1/) deliver significant cost savings for scale-out and Arm-based applications. These are the first EC2 instances powered by AWS Graviton Processors that feature 64-bit Arm Neoverse cores and custom silicon designed by AWS.
-* [M6g instances](https://aws.amazon.com/ec2/instance-types/m6/) (_currently in preview_) are powered by Arm-based AWS Graviton2 processors. They deliver up to 40% better price performance over current generation M5 instances and offer a balance of compute, memory, and networking resources for a broad set of workloads.
+* [M6g instances](https://aws.amazon.com/ec2/instance-types/m6/) are powered by Arm-based AWS Graviton2 processors. They deliver up to 40% better price performance over current generation M5 instances and offer a balance of compute, memory, and networking resources for a broad set of workloads.
 
 **Note:** The assets and instructions in this repository folder are offered as part of a _public preview_ program administered by AWS.
 
@@ -33,7 +33,6 @@ The specific resources you need to run containers on EC2 ARM instances with Amaz
 
 #### Important Considerations
 * EKS currently supports the ability to run all nodes on ARM instances with Kubernetes version 1.13 and 1.14.
-* If you plan to use **M6g instances**, ensure you have access to the M6g preview. Visit https://pages.awscloud.com/m6gpreview.html to request access. **A1 instances** are generally available for all AWS customers.
 
 ## Instructions
 Follow these instructions to create a Kubernetes cluster with Amazon EKS and start a service on EC2 ARM nodes.
@@ -110,7 +109,6 @@ kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master
 ```
 
 ### **Step 7.** Launch and Configure Amazon EKS ARM Worker Nodes
-0. (OPTIONAL) If you plan to use **M6g instances**, ensure you have access to the M6g preview. Visit https://pages.awscloud.com/m6gpreview.html to request access.
 1. Open the AWS CloudFormation console at https://console.aws.amazon.com/cloudformation. Ensure that you are in the AWS
 region that you created your EKS cluster in.
 2. Choose **Create stack**.
