@@ -18,9 +18,9 @@ We now have information for developer preview programs within this repository. I
 
 **Current Programs**
 * [EKS ARM Preview](/preview-programs/eks-arm-preview)
-* [ECS Multiple Target Groups](/preview-programs/ecs-multipletg-service)
 
 **Past Programs**
+* ECS Multiple Target Groups - *[Support for multiple target groups on ECS is generally available](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html)*
 * Firelens - *[Support for custom log routing is generally available](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)*
 * EKS Windows - *[Support for Windows on EKS is generally available](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)*
 
