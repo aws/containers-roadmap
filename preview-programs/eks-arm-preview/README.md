@@ -32,7 +32,7 @@ Using the instructions and assets in this repository folder is governed as a pre
 The specific resources you need to run containers on EC2 ARM instances with Amazon EKS are within this repository folder. All other resources needed to successfully start and manage an EKS cluster can be found within the [EKS user guide](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html).
 
 #### Important Considerations
-* EKS currently supports the ability to run all nodes on ARM instances with Kubernetes version 1.13 and 1.14.
+* EKS currently supports the ability to run all nodes on ARM instances with Kubernetes version 1.15 (the default), 1.14 and 1.13.
 
 ## Instructions
 Follow these instructions to create a Kubernetes cluster with Amazon EKS and start a service on EC2 ARM nodes.
@@ -43,7 +43,7 @@ Follow these instructions to create a Kubernetes cluster with Amazon EKS and sta
 To create our cluster, we will use [eksctl](https://eksctl.io/), the command line tool for EKS.
 
 1. Ensure you have the latest version of [Homebrew](https://brew.sh/) installed.
-If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+  If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 2. Install the Weaveworks Homebrew tap: `brew tap weaveworks/tap`
 3. Install ekstctl: `brew install weaveworks/tap/eksctl`
 4. Test that your installation was successful: `eksctl --help`
@@ -52,12 +52,12 @@ If you don't have Homebrew, you can install it with the command: `/usr/bin/ruby 
 If you used the Homebrew instructions above to install eksctl on macOS, then kubectl and the aws-iam-authenticator have already been installed on your system. Otherwise, you can refer to the Amazon EKS [getting started guide prerequisites](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#eks-prereqs).
 
 ### **Step 3.** Create Your VPC, IAM role, and Amazon EKS Cluster without worker nodes
-Create an EKS cluster without provisioning worker nodes using the following eksctl command, choosing the version of Kubernetes you would like to use:
+Create an EKS cluster without provisioning worker nodes using the following eksctl command (change the `--version` if you don't want Kubernetes 1.15):
 
 ```
 eksctl create cluster \
 --name arm-preview \
---version << Choose 1.13 or 1.14 >> \
+--version 1.15 \
 --region us-west-2 \
 --without-nodegroup
 ```
@@ -78,9 +78,9 @@ In order to support having only ARM nodes on our EKS cluster, we need to update 
 ### **Step 4.** Update the image ID used for CoreDNS
 Run one of the below commands based upon the version of Kubernetes you are using to install an updated version of `CoreDNS`:
 
-**Kubernetes 1.13**
+**Kubernetes 1.15**
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/dns-arm-1.13.yaml
+kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/dns-arm-1.15.yaml
 ```
 
 **Kubernetes 1.14**
@@ -88,12 +88,17 @@ kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master
 kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/dns-arm-1.14.yaml
 ```
 
+**Kubernetes 1.13**
+```shell
+kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/dns-arm-1.13.yaml
+```
+
 ### **Step 5.** Update the image ID used for kube-proxy
 Run the below command based upon the version of Kubernetes you are using to install an updated version of `kube-proxy`:
 
-**Kubernetes 1.13**
+**Kubernetes 1.15**
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/kube-proxy-arm-1.13.yaml
+kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/kube-proxy-arm-1.15.yaml
 ```
 
 **Kubernetes 1.14**
@@ -101,8 +106,13 @@ kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master
 kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/kube-proxy-arm-1.14.yaml
 ```
 
+**Kubernetes 1.13**
+```shell
+kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/kube-proxy-arm-1.13.yaml
+```
+
 ### **Step 6.** Deploy the ARM CNI Plugin
-Run the below command to install the AWS ARM64 CNI Plugin (this command will work for both 1.13 as well as 1.14):
+Run the below command to install the AWS ARM64 CNI Plugin (this config works on all Kubernetes versions):
 
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/aws/containers-roadmap/master/preview-programs/eks-arm-preview/aws-k8s-cni-arm64.yaml
@@ -141,9 +151,7 @@ region that you created your EKS cluster in.
   Cluster VPC step. (e.g. eksctl-\<cluster name\>-cluster/VPC)
   * **Subnets**: Choose the subnets that you created in Create your Amazon EKS Cluster VPC.
 
-  * **NodeImageAMI113**: The Amazon EC2 Systems Manager parameter for the 1.13 AMI image ID. You should not make any changes to this parameter; this value is ignored if you selected 1.14 for KubernetesVersion.
-
-  * **NodeImageAMI114**: The Amazon EC2 Systems Manager parameter for the 1.14 AMI image ID. You should not make any changes to this parameter; this value is ignored if you selected 1.13 for KubernetesVersion.
+  * **NodeImageAMI11X**: The Amazon EC2 Systems Manager parameter for the AMI image ID. You should not make any changes to this parameter.
 
 6. On the **Options** page, you can choose to tag your stack resources. Choose **Next**.
 7. On the **Review** page, review your information, acknowledge that the stack might create IAM resources, and then choose **Create**.
