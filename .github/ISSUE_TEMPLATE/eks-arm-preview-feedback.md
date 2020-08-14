@@ -9,6 +9,14 @@ assignees: ''
 
 Please let us know how we can improve the [EKS ARM preview program](https://github.com/aws/containers-roadmap/tree/master/preview-programs/eks-arm-preview). This can be a bug report, feature, or functionality request.
 
+<!--
+
+**Security disclosures**
+
+If you think you’ve found a potential security issue, please do not post it in the Issues.  Instead, please follow the instructions [here](https://aws.amazon.com/security/vulnerability-reporting/) or [email AWS security directly](mailto:aws-security@amazon.com).
+
+-->
+
 **Describe the issue**
 A clear and concise description
 

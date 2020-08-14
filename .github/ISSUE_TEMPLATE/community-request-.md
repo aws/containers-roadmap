@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-<!--- Please keep this note for the community --->
+<!-- Please keep this note for the community -->
 
 ### Community Note
 
@@ -15,7 +15,15 @@ assignees: ''
 * Please do not leave "+1" or "me too" comments, they generate extra noise for issue followers and do not help prioritize the request
 * If you are interested in working on this issue or have submitted a pull request, please leave a comment
 
-<!--- Thank you for keeping this note for the community --->
+<!-- Thank you for keeping this note for the community -->
+
+<!--
+
+**Security disclosures**
+
+If you think you’ve found a potential security issue, please do not post it in the Issues.  Instead, please follow the instructions [here](https://aws.amazon.com/security/vulnerability-reporting/) or [email AWS security directly](mailto:aws-security@amazon.com).
+
+-->
 
 **Tell us about your request**
 What do you want us to build?
