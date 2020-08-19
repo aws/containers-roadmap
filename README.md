@@ -18,9 +18,10 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 We now have information for developer preview programs within this repository. Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
 
 **Current Programs**
-* [EKS ARM Preview](/preview-programs/eks-arm-preview)
+There's more to come! Stay tuned!
 
 **Past Programs**
+* [EKS ARM Preview](/preview-programs/eks-arm-preview)
 * ECS Multiple Target Groups - *[Support for multiple target groups on ECS is generally available](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html)*
 * Firelens - *[Support for custom log routing is generally available](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html)*
 * EKS Windows - *[Support for Windows on EKS is generally available](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)*
