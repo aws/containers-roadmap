@@ -5,7 +5,7 @@ These are the principles that embody the culture of the container services organ
 ## People
 
 * we invest in people through a focus on individual development, career progression, mentorship, and active sponsorship;
-* we embrace diversity and inclusiveness recognizing that innovation is fueled by challenging accepted norms, driving for understanding, and broadening perspective;
+* we embrace diversity and inclusiveness, recognizing that innovation is fueled by challenging accepted norms, driving for understanding, and broadening perspective;
 * we empower the voice of the individual by creating an environment where everyone can speak up, where leaders listen, actively address, and follow through on feedback;
 
 ## Priorities
