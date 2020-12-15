@@ -10,10 +10,11 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 
 **Other AWS Public Roadmaps**
 * [AWS App Mesh](https://github.com/aws/aws-app-mesh-roadmap)
+* [AWS Proton](https://github.com/aws/aws-proton-public-roadmap)
 * [CloudFormation coverage](https://github.com/aws-cloudformation/aws-cloudformation-coverage-roadmap)
 * [AWS Elastic Beanstalk](https://github.com/aws/elastic-beanstalk-roadmap)
 * [Amazon EC2 Spot Instances integrations](https://github.com/aws/ec2-spot-instances-integrations-roadmap)
-* [AWS Controllers for Kubernetes (ACK)](https://github.com/aws/aws-controllers-k8s/projects/1)
+* [AWS Controllers for Kubernetes (ACK)](https://aws.github.io/aws-controllers-k8s/services/)
 
 ## Developer Preview Programs
 We now have information for developer preview programs within this repository. Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
