@@ -16,6 +16,7 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 * [Amazon EC2 Spot Instances integrations](https://github.com/aws/ec2-spot-instances-integrations-roadmap)
 * [AWS Controllers for Kubernetes (ACK)](https://github.com/aws-controllers-k8s/community/projects/1)
 * [AWS CDK](https://github.com/orgs/aws/projects/7)
+* [AWS App Runner](https://github.com/aws/apprunner-roadmap/projects/1)
 
 ## Developer Preview Programs
 We now have information for developer preview programs within this repository. Issues tagged [Developer Preview](https://github.com/aws/containers-roadmap/labels/Developer%20Preview) on the public roadmap are active preview programs.
