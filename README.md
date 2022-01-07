@@ -66,9 +66,9 @@ A: Please open an issue!  You can read about how to contribute [here](/CONTRIBUT
 
 A: We haven't worked out how pull requests should work for a public roadmap page, but we will take all PRs very seriously and review for inclusion. Read about [contributing](/CONTRIBUTING.md).
 
-**Q: Is there a way to stay informed about news around EKS?**
+**Q: Is there a way to stay informed about news around EKS outside of the roadmap?**
 
-A: We have created [EKS.news](https://eks.news/), a bi-weekly newsletter, so that folks can get the latest and greatest straight from the EKS team itself.
+A: Follow any issues you want to keep informed about to be notified when they ship. We have created [EKS.news](https://eks.news/), a bi-weekly newsletter, so that folks can get the latest and greatest straight from the EKS team itself.
 
 ## License
 
