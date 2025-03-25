@@ -9,7 +9,6 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 [See the roadmap »](https://github.com/aws/containers-roadmap/projects/1)
 
 **Other AWS Public Roadmaps**
-* [AWS App Mesh](https://github.com/aws/aws-app-mesh-roadmap)
 * [AWS Proton](https://github.com/aws/aws-proton-public-roadmap)
 * [CloudFormation coverage](https://github.com/aws-cloudformation/aws-cloudformation-coverage-roadmap)
 * [AWS Elastic Beanstalk](https://github.com/aws/elastic-beanstalk-roadmap)
